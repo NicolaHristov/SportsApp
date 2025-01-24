@@ -1,0 +1,64 @@
+
+body {
+    background-image: url(/img/swimming1.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    height: 100vh;
+}
+.parrent{
+    text-align: center;
+    padding: 250px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 70px;
+    align-items: center;
+}
+.header-logo{
+    display: flex;
+    align-items: center;
+}
+.header-logo-site-title{
+    font-size: 36px;
+    padding-right: 25px;
+    position: relative;
+}
+.header-logo-site-title::after{
+    content: "";
+    width: 1px;
+    height:90%;
+    background: black;
+    position: absolute;
+    right: 11px;
+}
+.header-logo-site-source{
+    color: yellow;
+    font-size: 15px;
+    font-weight: normal;
+}
+.header-nav-list{
+    padding-right: 0;
+    display:flex;
+}
+.header-nav-list-item {
+    list-style: none;
+    background: #ECECEC;
+    padding: 18px;
+    margin: 0 1px;
+
+}
+.header-nav-list-item-link{
+    text-decoration: none;
+    color: black;
+
+}
+
+.header-nav-list-item-link.active a{
+    color: white;
+}
+
