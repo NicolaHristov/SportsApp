@@ -12,4 +12,9 @@ public class HomeController {
 
         return "index";
     }
+
+    @GetMapping("/")
+    public String forDelete(){
+        return "index";
+    }
 }
