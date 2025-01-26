@@ -22,4 +22,9 @@ public class HomeController {
     public String forDeleteew(){
         return "index";
     }
+
+    @GetMapping("/")
+    public String forDeleteew3(){
+        return "index";
+    }
 }
