@@ -27,4 +27,8 @@ public class HomeController {
     public String forDeleteew3(){
         return "index";
     }
+    @GetMapping("/")
+    public String forDeleteew4(){
+        return "index";
+    }
 }
