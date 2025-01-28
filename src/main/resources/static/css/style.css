@@ -4,9 +4,69 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    background-repeat: no-repeat; /* Избягваме повтаряне */
     margin: 0;
     font-family: Helvetica, sans-serif;
     height: 100vh;
+}
+
+/* Центриране на съдържанието в средата на екрана */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Височина на прозореца */
+}
+
+/* Формата (фон и сянка) */
+/*form {*/
+/*    background: rgba(255, 255, 255, 0.9); !* Полупрозрачен бял фон *!*/
+/*    padding: 30px; !* Разстояние вътре в формата *!*/
+/*    border-radius: 10px; !* Заоблени ъгли *!*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); !* Лека сянка *!*/
+/*    width: 600px; !* Ширина на формата *!*/
+/*    min-height: 450px;*/
+/*}*/
+form {
+    display: flex; /* Активира Flexbox */
+    flex-direction: column; /* Подрежда елементите вертикално (един под друг) */
+    align-items: center; /* Центрира по хоризонтала */
+    justify-content: center; /* Центрира по вертикала */ /* Полупрозрачен бял фон */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px; /* Вътрешно отстояние */
+    border-radius: 10px; /* Заоблени ъгли */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Лека сянка */
+    width: 600px; /* Ширина на формата */
+    min-height: 400px; /* Минимална височина на формата */
+
+}
+input[type="text"],
+input[type="password"] {
+    font-size: 1.2em; /* Увеличава размера на шрифта */
+    padding: 10px; /* Увеличава вътрешното отстояние за по-големи полета */
+    width: 100%; /* Полетата ще заемат цялата ширина на родителя */
+    margin-bottom: 15px; /* Разстояние под всяко поле */
+}
+
+/* Стилове за бутона */
+button {
+    font-size: 1.2em; /* Увеличава размера на шрифта на бутона */
+    padding: 10px 20px; /* Увеличава вътрешното отстояние за по-голям бутон */
+    width: 100%; /* Бутонът ще заема цялата ширина на родителя */
+    margin-top: 10px; /* Разстояние над бутона */
+}
+
+/* Заглавието */
+h1 {
+    margin-bottom: 20px; /* Разстояние под заглавието */
+    color: #fff; /* Бял текст за заглавието */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Сянка на текста */
+}
+
+/* Оправяне на бутоните и инпутите */
+input, button {
+    margin-bottom: 15px;
 }
 .parrent{
     text-align: center;

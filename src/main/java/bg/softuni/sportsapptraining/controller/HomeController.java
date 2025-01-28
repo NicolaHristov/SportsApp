@@ -13,22 +13,5 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/")
-    public String forDelete(){
-        return "index";
-    }
 
-    @GetMapping("/")
-    public String forDeleteew(){
-        return "index";
-    }
-
-    @GetMapping("/")
-    public String forDeleteew3(){
-        return "index";
-    }
-    @GetMapping("/")
-    public String forDeleteew4(){
-        return "index";
-    }
 }
