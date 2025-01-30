@@ -8,14 +8,6 @@ body {
     background-position:center;
     background-size: cover;
     margin: 0;
-    /*    background-image: url(/img/swimming1.jpg);*/
-    /*    background-position: center;*/
-    /*    background-attachment: fixed;*/
-    /*    background-size: cover;*/
-    /*    background-repeat: no-repeat; !* Избягваме повтаряне *!*/
-    /*    margin: 0;*/
-    /*    font-family: Helvetica, sans-serif;*/
-    /*    height: 100vh;*/
 }
 main {
     background: #222;
@@ -33,25 +25,20 @@ main {
     display: inline-block;
     margin-bottom: 20px;
 }
-/*    display: flex; !* Активира Flexbox *!*/
-/*    flex-direction: column; !* Подрежда елементите вертикално (един под друг) *!*/
-/*    align-items: center; !* Центрира по хоризонтала *!*/
-/*    justify-content: center; !* Центрира по вертикала *! !* Полупрозрачен бял фон *!*/
-/*    background-color: rgba(255, 255, 255, 0.8);*/
-/*    padding: 10px 20px; !* Вътрешно отстояние *!*/
-/*    border-radius: 10px; !* Заоблени ъгли *!*/
-/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); !* Лека сянка *!*/
-/*    width: 600px; !* Ширина на формата *!*/
-/*    min-height: 400px; !* Минимална височина на формата *!*/
+
 .register-form {
     display: flex;
     flex-direction: column;
+    max-width: 400px;
+    padding: 15px;
+    margin: 10px;
 }
 .register-form label {
     color: white;
     font-weight: bold;
     margin-top: 10px;
-    text-align: left;
+    text-align: center;
+    font-size: 26px;
 }
 .register-form input {
     width: 100%;
@@ -63,104 +50,15 @@ main {
 .register-button {
     background: yellow;
     border: none;
-    padding: 10px;
-    margin-top: 15px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 12px;
     font-weight: bold;
+    display: block;
+    margin: 15px auto;
+    padding: 13px 44px;
+    font-size: 19px;
+    letter-spacing: 2px;
 }
-/*body {*/
-/*    background-image: url(/img/swimming1.jpg);*/
-/*    background-position: center;*/
-/*    background-attachment: fixed;*/
-/*    background-size: cover;*/
-/*    background-repeat: no-repeat; !* Избягваме повтаряне *!*/
-/*    margin: 0;*/
-/*    font-family: Helvetica, sans-serif;*/
-/*    height: 100vh;*/
-/*}*/
-
-/*!* Центриране на съдържанието в средата на екрана *!*/
-/*main {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 100vh; !* Височина на прозореца *!*/
-/*}*/
-
-/*form {*/
-/*    display: flex; !* Активира Flexbox *!*/
-/*    flex-direction: column; !* Подрежда елементите вертикално (един под друг) *!*/
-/*    align-items: center; !* Центрира по хоризонтала *!*/
-/*    justify-content: center; !* Центрира по вертикала *! !* Полупрозрачен бял фон *!*/
-/*    background-color: rgba(255, 255, 255, 0.8);*/
-/*    padding: 10px 20px; !* Вътрешно отстояние *!*/
-/*    border-radius: 10px; !* Заоблени ъгли *!*/
-/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); !* Лека сянка *!*/
-/*    width: 600px; !* Ширина на формата *!*/
-/*    min-height: 400px; !* Минимална височина на формата *!*/
-
-/*}*/
-/*.title{*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    color: black;*/
-/*    flex-direction: column;*/
-/*    font-size: 30px;*/
-/*    letter-spacing: 3px;*/
-/*}*/
-
-/*.test{*/
-/*    font-size: 1.2em;*/
-/*    padding: 10px;*/
-/*    margin-bottom: 15px;*/
-/*}*/
-/*.labelForm {*/
-/*    display: block;*/
-/*    margin-bottom: 5px;*/
-/*    font-size: 1.2em;*/
-/*}*/
-
-/*.inputForm {*/
-/*    width: 100%; !* Полетата ще заемат цялата широчина на контейнера *!*/
-/*    padding: 8px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 5px;*/
-/*    box-sizing: border-box; !* Запазва padding-а в широчината *!*/
-/*}*/
-
-/*!*input[type="text"],*!*/
-/*!*input[type="password"] {*!*/
-/*!*    font-size: 1.2em; !* Увеличава размера на шрифта *!*!*/
-/*!*    padding: 10px; !* Увеличава вътрешното отстояние за по-големи полета *!*!*/
-/*!*    !*width: 100%; !* Полетата ще заемат цялата ширина на родителя *!*!*!*/
-/*!*    margin-bottom: 15px; !* Разстояние под всяко поле *!*!*/
-/*!*}*!*/
-
-/*!* Стилове за бутона *!*/
-/*button {*/
-/*    display: block;*/
-/*    font-size: 1.2em; !* Увеличава размера на шрифта на бутона *!*/
-/*    padding: 10px 20px; !* Увеличава вътрешното отстояние за по-голям бутон *!*/
-/*    margin: 10px auto; !* Разстояние над бутона *!*/
-/*}*/
-
-/*!* Заглавието *!*/
-/*h1 {*/
-/*    margin-bottom: 20px; !* Разстояние под заглавието *!*/
-/*    color: #fff; !* Бял текст за заглавието *!*/
-/*    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); !* Сянка на текста *!*/
-/*}*/
-
-/*!* Оправяне на бутоните и инпутите *!*/
-/*input, button {*/
-/*    margin-bottom: 15px;*/
-/*}*/
-/*.parrent{*/
-/*    text-align: center;*/
-/*    padding: 250px;*/
-/*}*/
 
 .header{
     display: flex;
