@@ -8,6 +8,7 @@ body {
     background-position:center;
     background-size: cover;
     margin: 0;
+    font-family: Helvetica, sans-serif;
 }
 main {
     background: #222;
@@ -17,13 +18,35 @@ main {
     text-align: center;
     width: 350px;
 }
-.title {
-    background: black;
+
+/*.title {*/
+/*    background: black;*/
+/*    color: white;*/
+/*    padding: 10px;*/
+/*    border-radius: 20px;*/
+/*    display: inline-block;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+.login-form{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    padding: 15px;
+    margin: 10px;
+}
+.login-form label {
     color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 26px;
+}
+.login-form input {
+    width: 100%;
     padding: 10px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
 }
 
 .register-form {
@@ -59,12 +82,22 @@ main {
     font-size: 19px;
     letter-spacing: 2px;
 }
-
+fieldset {
+    border: none;
+}
 .header{
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*padding: 20px 70px;*/
+    /*align-items: center;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0px;
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 20px 70px;
-    align-items: center;
 }
 .header-logo{
     display: flex;
@@ -88,9 +121,16 @@ main {
     font-size: 15px;
     font-weight: normal;
 }
+.header-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; /* избутва бутоните наляво */
+}
+
 .header-nav-list{
-    padding-right: 0;
+    padding-right: 15px;
     display:flex;
+    gap:20px;
 }
 .header-nav-list-item {
     list-style: none;
