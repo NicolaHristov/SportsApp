@@ -15,7 +15,7 @@ public class Sport {
     @Column(nullable = false,unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "sport")
+    @OneToMany(mappedBy = "sport", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Discipline> disciplines;
 
     public Sport() {
