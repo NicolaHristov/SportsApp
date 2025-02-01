@@ -20,7 +20,7 @@ public class Discipline {
     @Column(name = "world_record_time")
     private String worldRecordTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Sport sport;
 
     public Discipline() {
