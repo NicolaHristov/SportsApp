@@ -2,6 +2,7 @@ package bg.softuni.sportsapptraining.service;
 
 import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
+import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
 import bg.softuni.sportsapptraining.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,17 @@ public class UserService {
         user.setEmail(data.getEmail());
 
         this.userRepository.save(user);
+
+        return true;
+    }
+
+    public boolean login(UserLoginDto data) {
+        Optional<User> byUsername = userRepository.findByUsername(data.getUsername());
+
+       if(byUsername.isEmpty()){
+           return false;
+       }
+
 
         return true;
     }
