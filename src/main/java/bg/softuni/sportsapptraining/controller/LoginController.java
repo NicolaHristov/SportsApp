@@ -28,7 +28,10 @@ public class LoginController {
     public String doLogin(@Valid UserLoginDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
+             redirectAttributes.addFlashAttribute("loginData",data);
+             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData",bindingResult);
 
+            return "redirect:/login";
         }
 
        userService.login(data);
