@@ -16,6 +16,10 @@ public class UserSession {
         this.username = user.getUsername();
     }
 
+    public boolean isUserLoggedIn(){
+        return id != 0;
+    }
+
     public UserSession() {
     }
 
