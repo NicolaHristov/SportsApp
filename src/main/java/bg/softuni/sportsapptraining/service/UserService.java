@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.service;
 
+import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserSession userSession;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserSession userSession) {
         this.userRepository = userRepository;
+        this.userSession = userSession;
     }
 
     public boolean register(RegisterDto data){
@@ -47,5 +50,9 @@ public class UserService {
 
 
         return true;
+    }
+
+    public void logout() {
+         userSession.logout();
     }
 }
