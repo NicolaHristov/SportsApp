@@ -9,38 +9,25 @@
 </head>
 <body>
 
-<header>
-    <nav>
+<header class="header">
+    <nav class="header-nav">
         <a th:href="@{/}">Sports App</a>
-        <a
-                th:href="@{/home}"
-
-        >
-
+        <a th:href="@{/home}">
         </a>
 
-        <div >
-            <ul class="navbar-nav row">
-                <li
-
-                >
+        <article >
+            <ul class="header-nav-list">
+                <li class="header-nav-list-item active">
                     <a th:href="@{/login}">Login</a>
                 </li>
-
-                <li
-
-                >
+                <li class="header-nav-list-item active">
                     <a  th:href="@{/register}">Register</a>
                 </li>
-
-                <li
-
-                       >
-                    <a
-                            th:href="@{/logout}">Logout</a>
+                <li class="header-nav-list-item active">
+                    <a th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
-        </div>
+        </article>
     </nav>
 </header>
 

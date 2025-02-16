@@ -36,7 +36,7 @@ public class LoginController {
 
        userService.login(data);
 
-        return "redirect:/register";
+        return "redirect:/home";
     }
 
 
