@@ -46,8 +46,9 @@ public class UserService {
            return false;
        }
 
+       User user = byUsername.get();
 
-
+        userSession.login(user);
 
         return true;
     }
