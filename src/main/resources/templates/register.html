@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -41,14 +42,24 @@
         <small class="invalid-feedback text-danger">Email error message</small>
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                th:field="*{password}"
+        >
 
         <label for="confirm-password">Confirm Password</label>
         <input
                 type="password"
                 id="confirm-password"
                 name="confirm-password"
+                th:field="*{confirmPassword}"
         >
+        <div th:if="${passError}" class="error-message">
+            <p>Passwords do not match!</p>
+        </div>
 
         <button type="submit" class="register-button">Register</button>
     </form>
