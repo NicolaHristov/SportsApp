@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -56,55 +56,18 @@
                 id="confirm-password"
                 name="confirm-password"
                 th:field="*{confirmPassword}"
+                >
+        <small th:if="${passError}" class="alert alert-danger">
+           Passwords do not match
+        </small>
         >
-        <div th:if="${passError}" class="error-message">
-            <p>Passwords do not match!</p>
-        </div>
+
+        >
+
 
         <button type="submit" class="register-button">Register</button>
     </form>
 </main>
-<!--<main class="container">-->
-<!--  <h1 class="title">Register</h1>-->
-<!--  <form class="register-form">-->
-<!--    <label for="username">Username</label>-->
-<!--    <input type="text" id="username" name="username" required>-->
-
-<!--    <label for="email">Email</label>-->
-<!--    <input type="email" id="email" name="email" required>-->
-
-<!--    <label for="password">Password</label>-->
-<!--    <input type="password" id="password" name="password" required>-->
-
-<!--    <-->
-<!--&lt;!&ndash;<main>&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;  <form&ndash;&gt;-->
-<!--&lt;!&ndash;    th:action="@{/register}"&ndash;&gt;-->
-<!--&lt;!&ndash;    th:method="POST"&ndash;&gt;-->
-
-<!--&lt;!&ndash;  >&ndash;&gt;-->
-<!--&lt;!&ndash;    <fieldset>&ndash;&gt;-->
-<!--&lt;!&ndash;      <h1 class="title">Register</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;      <label class="labelForm" for="username">Username</label>&ndash;&gt;-->
-<!--&lt;!&ndash;      <input class="inputForm" type="text"  id="username" name="username">&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <label class="labelForm" for="email">Email</label>&ndash;&gt;-->
-<!--&lt;!&ndash;      <input class="inputForm" type="email" id="email" name="email">&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <label class="labelForm" for="password">Password</label>&ndash;&gt;-->
-<!--&lt;!&ndash;      <input class="inputForm" type="password" id="password" name="password">&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <label class="labelForm" for="confirm password">Confirm Password</label>&ndash;&gt;-->
-<!--&lt;!&ndash;      <input class="inputForm" type="password" id="confirm password" name="confirm password">&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <div >&ndash;&gt;-->
-<!--&lt;!&ndash;        <button type="submit"value="Register">Register</button>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </fieldset>&ndash;&gt;-->
-<!--&lt;!&ndash;  </form>&ndash;&gt;-->
-<!--&lt;!&ndash;</main>&ndash;&gt;-->
 
 </body>
 </html>
