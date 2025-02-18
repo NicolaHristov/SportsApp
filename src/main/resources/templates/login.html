@@ -13,13 +13,12 @@
     <form
             th:action="@{/login}"
             th:method="POST"
+            th:object="${loginData}"
             class="login-form">
         <fieldset>
-<!--            <legend>Login</legend>-->
-<!--            <h1 class="title">Login</h1>-->
 
             <label class="labelForm" for="username">Username</label>
-            <input class="inputForm" type="text"  id="username" name="username">
+            <input class="inputForm" type="text"  id="username" name="username" th:field="*{username}">
 
             <label class="labelForm" for="password">Password</label>
             <input class="inputForm" type="password" id="password" name="password">

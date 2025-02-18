@@ -48,7 +48,14 @@
                 name="password"
                 required
                 th:field="*{password}"
+                th:errorclass="is-invalid"
         >
+
+<!--        <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">-->
+<!--            <span th:errors="*{password}"></span>-->
+<!--        </div>-->
+<!--        <small class="invalid-feedback text-danger"> Passwords do not match</small>-->
+
 
         <label for="confirm-password">Confirm Password</label>
         <input
@@ -60,10 +67,6 @@
         <small th:if="${passError}" class="alert alert-danger">
            Passwords do not match
         </small>
-        >
-
-        >
-
 
         <button type="submit" class="register-button">Register</button>
     </form>

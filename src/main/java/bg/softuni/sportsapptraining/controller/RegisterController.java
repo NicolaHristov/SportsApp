@@ -35,13 +35,6 @@ public class RegisterController {
     @PostMapping("/register")
     public String doRegister(@Valid RegisterDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
-        boolean passwordDiff = data.getPassword().equals(data.getConfirmPassword());
-
-        if(!passwordDiff){
-            redirectAttributes.addFlashAttribute("passError",true);
-
-            return "redirect:/register";
-        }
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("registerData",data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData",bindingResult);
@@ -49,6 +42,16 @@ public class RegisterController {
             return "redirect:/register";
         }
 
+        boolean passwordDiff = data.getPassword().equals(data.getConfirmPassword());
+
+        if(!passwordDiff){
+//            redirectAttributes.addFlashAttribute("registerData",data);
+            redirectAttributes.addFlashAttribute("passError",true);
+
+            return "redirect:/register";
+        }
+
+        
 
          boolean success = userService.register(data);
 
