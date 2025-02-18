@@ -35,7 +35,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String doRegister(@Valid RegisterDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())){
             redirectAttributes.addFlashAttribute("registerData",data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData",bindingResult);
 
