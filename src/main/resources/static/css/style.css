@@ -126,6 +126,12 @@ fieldset {
     display: flex;
     justify-content: flex-end; /* избутва бутоните наляво */
 }
+.header-nav-list-sports{
+    padding-right: 15px;
+    flex-grow: 1;
+    display:flex;
+    gap:20px;
+}
 
 .header-nav-list{
     padding-right: 15px;
