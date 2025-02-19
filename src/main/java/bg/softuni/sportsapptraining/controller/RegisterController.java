@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.service.UserService;
 import jakarta.validation.Valid;
@@ -15,10 +16,12 @@ public class RegisterController {
 
 
     private final UserService userService;
+    private final UserSession userSession;
 
 
-    public RegisterController(UserService userService) {
+    public RegisterController(UserService userService, UserSession userSession) {
         this.userService = userService;
+        this.userSession = userSession;
     }
 
     @ModelAttribute("registerData")
@@ -28,12 +31,18 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String register(){
-
+        if(userSession.isUserLoggedIn()){
+            return "redirect:/home";
+        }
         return "register";
     }
 
     @PostMapping("/register")
     public String doRegister(@Valid RegisterDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+
+        if(userSession.isUserLoggedIn()){
+            return "redirect:/home";
+        }
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("registerData",data);
