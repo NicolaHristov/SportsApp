@@ -26,6 +26,12 @@ public class Discipline {
     public Discipline() {
     }
 
+    public Discipline(String name, String worldRecordHolder, String worldRecordTime) {
+        this.name = name;
+        this.worldRecordHolder = worldRecordHolder;
+        this.worldRecordTime = worldRecordTime;
+    }
+
     public long getId() {
         return id;
     }

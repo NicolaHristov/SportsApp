@@ -9,6 +9,12 @@ public class AthleticsDto {
     public AthleticsDto() {
     }
 
+    public AthleticsDto(String discipline, String worldChampion, String worldRecord) {
+        this.discipline = discipline;
+        this.worldChampion = worldChampion;
+        this.worldRecord = worldRecord;
+    }
+
     public String getDiscipline() {
         return discipline;
     }
