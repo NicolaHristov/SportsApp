@@ -29,5 +29,18 @@ public class AthleticsService {
         return disciplineRepository.save(discipline);
     }
 }
-
+//    public List<AthleticsDto> getAllDisciplines() {
+//        return List.of(
+//                new AthleticsDto("100 метра", "Фред Кърли", "9.58 сек (Юсейн Болт)"),
+//                new AthleticsDto("200 метра", "Ноа Лайлс", "19.19 сек (Юсейн Болт)"),
+//                new AthleticsDto("400 метра", "Майкъл Норман", "43.03 сек (Уейд ван Нийкерк)")
+//        );
+//    }
+//
+//    public AthleticsDto getDisciplineByName(String name) {
+//        return getAllDisciplines().stream()
+//                .filter(d -> d.getDiscipline().equalsIgnoreCase(name))
+//                .findFirst()
+//                .orElse(null);
+//    }
 
