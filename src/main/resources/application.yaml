@@ -27,6 +27,10 @@ logging:
     blog: WARN
 server:
   port: 8080
+cloudinary:
+  cloud-name: "dccqkyfpt"
+  api-key: "995832413948972"
+  api-secret: "dnp3ZgWG92KfRF2IJv3rF-dUCuA"
 
 
 
