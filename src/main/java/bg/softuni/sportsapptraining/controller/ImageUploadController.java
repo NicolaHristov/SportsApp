@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -22,9 +23,10 @@ public class ImageUploadController {
     }
 
     @PostMapping
-    public String uploadImage(@RequestParam String filePath) {
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
-            return "Uploaded image: " + imageUploadService.uploadImage(filePath);
+            String imageUrl = imageUploadService.uploadImage(file);
+            return "Uploaded image: " + imageUrl;
         } catch (IOException e) {
             return "Upload error: " + e.getMessage();
         }

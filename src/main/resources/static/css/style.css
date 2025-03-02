@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(/img/swimming1.jpg);
+    background-image: url("http://res.cloudinary.com/dccqkyfpt/image/upload/v1740919118/rdp8qqa3z67bulgjbkzl.jpg");
     background-repeat: no-repeat;
     background-position:center;
     background-size: cover;
@@ -27,6 +27,16 @@ main {
 /*    display: inline-block;*/
 /*    margin-bottom: 20px;*/
 /*}*/
+.fullscreen-image {
+    width: 100vw;
+    height: 100vh; /* 100% от височината на екрана */
+    object-fit: cover; /* Запълва екрана, без да се разтяга грозно */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Поставя изображението зад останалото съдържание */
+}
+
 .login-form{
     display: flex;
     flex-direction: column;
