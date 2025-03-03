@@ -19,7 +19,7 @@
       <select name="discipline">
           <option value="" disabled selected>-- Choose discipline--</option>
           <th:block th:each="discipline : ${disciplines}">
-              <option th:value="${discipline.discipline}" th:text="${discipline.discipline}"></option>
+              <option th:value="${discipline.name}" th:text="${discipline.name}"></option>
           </th:block>
       </select>
       <button type="submit">View</button>

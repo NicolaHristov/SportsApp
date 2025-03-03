@@ -29,12 +29,12 @@ main {
 /*}*/
 .fullscreen-image {
     width: 100vw;
-    height: 100vh; /* 100% от височината на екрана */
-    object-fit: cover; /* Запълва екрана, без да се разтяга грозно */
+    height: 100vh;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; /* Поставя изображението зад останалото съдържание */
+    z-index: -1;
 }
 
 .login-form{

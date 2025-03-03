@@ -30,13 +30,6 @@ public class AthleticController {
         return "athletics";
     }
 
-//    @PostMapping("/athletics")
-//    public String getAthletics(@Valid AthleticsDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-//
-//
-//
-//        return "athletics";
-//    }
 @PostMapping("/athletics")
 public String getAthletics(@RequestParam("discipline") String discipline, Model model) {
     Discipline selectedDiscipline = athleticsService.getDisciplineByName(discipline);

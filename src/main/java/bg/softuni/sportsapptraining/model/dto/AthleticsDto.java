@@ -6,7 +6,7 @@ public class AthleticsDto {
     private String worldChampion;
     private String worldRecord;
 
-    public AthleticsDto(String s, String ноаЛайлс, String string, String url) {
+    public AthleticsDto() {
     }
 
     public AthleticsDto(String discipline, String worldChampion, String worldRecord) {
