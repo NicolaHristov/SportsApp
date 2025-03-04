@@ -15,15 +15,19 @@
 
 
 
-  <form action="/athletics" method="post"  class="athletics-form">
-      <select name="discipline">
-          <option value="" disabled selected>-- Choose discipline--</option>
-          <th:block th:each="discipline : ${disciplines}">
-              <option th:value="${discipline.name}" th:text="${discipline.name}"></option>
-          </th:block>
-      </select>
-      <button type="submit">View</button>
-  </form>
+
+
+<div th:if="${selectedDiscipline == null}">
+    <form action="/athletics" method="post" class="athletics-form">
+        <select name="discipline">
+            <option value="" disabled selected>-- Choose discipline--</option>
+            <th:block th:each="discipline : ${disciplines}">
+                <option th:value="${discipline.name}" th:text="${discipline.name}"></option>
+            </th:block>
+        </select>
+        <button type="submit">View</button>
+    </form>
+</div>
 
   <div th:if="${selectedDiscipline}" class="athletics-info">
       <h2 th:text="'Discipline: ' + ${selectedDiscipline.name}"></h2>
