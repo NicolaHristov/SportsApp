@@ -33,8 +33,19 @@ public class AthleticController {
 @PostMapping("/athletics")
 public String getAthletics(@RequestParam("discipline") String discipline, Model model) {
     Discipline selectedDiscipline = athleticsService.getDisciplineByName(discipline);
+
+    String championImageUrl = getChampionImageUrl(discipline);
     model.addAttribute("selectedDiscipline", selectedDiscipline);
     model.addAttribute("disciplines", athleticsService.getAllDisciplines());
+    model.addAttribute("championImageUrl", championImageUrl);
     return "athletics";
 }
+
+    private String getChampionImageUrl(String discipline) {
+        return switch (discipline) {
+            case "100 metres" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093942/suiya5avwujwytzjhwhg.jpg";
+            case "200 metres" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
+            default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
+        };
+    }
 }
