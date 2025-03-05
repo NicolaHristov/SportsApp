@@ -108,6 +108,23 @@ main {
 .athletics-form button {
     margin-top: 15px;
 }
+.btn-choose{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff; /* Син цвят */
+    color: white; /* Бял текст */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* По-тъмен син при ховър */
+}
+
 
 .register-form {
     display: flex;
