@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.model;
 
+import bg.softuni.sportsapptraining.model.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,9 @@ public class User {
     private String password;
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 
     public User() {
     }
@@ -50,5 +54,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

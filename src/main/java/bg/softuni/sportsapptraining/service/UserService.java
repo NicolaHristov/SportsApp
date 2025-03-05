@@ -4,10 +4,12 @@ import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
+import bg.softuni.sportsapptraining.model.enums.Role;
 import bg.softuni.sportsapptraining.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,5 +57,15 @@ public class UserService {
 
     public void logout() {
          userSession.logout();
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public void changeUserRole(Long userId, Role newRole) {
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setRole(newRole);
+        userRepository.save(user);
     }
 }
