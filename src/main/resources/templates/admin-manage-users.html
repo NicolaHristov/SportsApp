@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<h2>Manage Users</h2>
 
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+            <!-- Ако потребителят е USER, покажи бутон "Make Admin" -->
+            <form action="/admin/change-role" method="post" th:if="${user.role.name() == 'ROLE_USER'}">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <input type="hidden" name="newRole" value="ROLE_ADMIN">
+                <button type="submit">Make Admin</button>
+            </form>
+
+            <!-- Ако потребителят е ADMIN, покажи бутон "Make User" -->
+            <form action="/admin/change-role" method="post" th:if="${user.role.name() == 'ROLE_ADMIN'}">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <input type="hidden" name="newRole" value="ROLE_USER">
+                <button type="submit" class="btn-danger">Make User</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

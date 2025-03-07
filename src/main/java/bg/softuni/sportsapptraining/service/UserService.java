@@ -6,6 +6,7 @@ import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
 import bg.softuni.sportsapptraining.model.enums.Role;
 import bg.softuni.sportsapptraining.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserSession userSession;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserSession userSession) {
+    public UserService(UserRepository userRepository, UserSession userSession, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userSession = userSession;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public boolean register(RegisterDto data){
@@ -35,6 +38,7 @@ public class UserService {
         user.setUsername(data.getUsername());
         user.setPassword(data.getPassword());
         user.setEmail(data.getEmail());
+        user.setPassword(passwordEncoder.encode(data.getPassword()));
 
         this.userRepository.save(user);
 
@@ -49,6 +53,12 @@ public class UserService {
        }
 
        User user = byUsername.get();
+
+        boolean passMatch = passwordEncoder.matches(data.getPassword(), user.getPassword());
+
+        if (!passMatch) {
+            return false;
+        }
 
         userSession.login(user);
 
