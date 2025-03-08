@@ -73,9 +73,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void changeUserRole(Long userId, Role newRole) {
-        User user = userRepository.findById(userId).orElseThrow();
+    public boolean changeUserRole(Long userId, Role newRole) {
+        Optional<User> userOpt = userRepository.findById(userId);
+
+        if (userOpt.isEmpty()) {
+            return false;
+        }
+
+        User user = userOpt.get();
+        if (user.getRole() == newRole) {
+            return false;
+        }
+
         user.setRole(newRole);
         userRepository.save(user);
+
+        return true;
+    }
+
+
+
+
+    public Optional<User> findUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 }

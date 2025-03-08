@@ -1,0 +1,208 @@
+[1mdiff --git a/src/main/java/bg/softuni/sportsapptraining/controller/AdminController.java b/src/main/java/bg/softuni/sportsapptraining/controller/AdminController.java[m
+[1mindex 8385988..a43e6e3 100644[m
+[1m--- a/src/main/java/bg/softuni/sportsapptraining/controller/AdminController.java[m
+[1m+++ b/src/main/java/bg/softuni/sportsapptraining/controller/AdminController.java[m
+[36m@@ -24,12 +24,39 @@[m [mpublic class AdminController {[m
+     @GetMapping("/manage-users")[m
+     public String manageUsers(Model model) {[m
+         model.addAttribute("users", userService.findAllUsers());[m
+[31m-        return "admin/manage-users";[m
+[32m+[m[32m        return "admin-manage-users";[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    @GetMapping("/change-role")[m[41m[m
+[32m+[m[32m    public String showChangeRolePage(@RequestParam("userId") Long userId, Model model) {[m[41m[m
+[32m+[m[32m        model.addAttribute("user", userService.findUserById(userId));[m[41m[m
+[32m+[m[32m        model.addAttribute("roles", Role.values());[m[41m[m
+[32m+[m[32m        return "admin/change-role";[m[41m[m
+     }[m
+ [m
+[32m+[m[32m//    @PostMapping("/change-role")[m[41m[m
+[32m+[m[32m//    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {[m[41m[m
+[32m+[m[32m//        userService.changeUserRole(userId, Role.valueOf(newRole));[m[41m[m
+[32m+[m[32m//        return "redirect:/admin/manage-users";[m[41m[m
+[32m+[m[32m//    }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+     @PostMapping("/change-role")[m
+[31m-    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {[m
+[31m-        userService.changeUserRole(userId, Role.valueOf(newRole));[m
+[31m-        return "redirect:/admin/manage-users";[m
+[32m+[m[32m    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRoleStr, Model model) {[m[41m[m
+[32m+[m[32m        try {[m[41m[m
+[32m+[m[32m            Role newRole = Role.valueOf(newRoleStr);[m[41m[m
+[32m+[m[32m            boolean success = userService.changeUserRole(userId, newRole);[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m            if (!success) {[m[41m[m
+[32m+[m[32m                model.addAttribute("error", "Invalid role or user not found.");[m[41m[m
+[32m+[m[32m            } else {[m[41m[m
+[32m+[m[32m                model.addAttribute("success", "User role updated successfully.");[m[41m[m
+[32m+[m[32m            }[m[41m[m
+[32m+[m[32m        } catch (IllegalArgumentException e) {[m[41m[m
+[32m+[m[32m            model.addAttribute("error", "Invalid role specified.");[m[41m[m
+[32m+[m[32m        }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        model.addAttribute("users", userService.findAllUsers());[m[41m[m
+[32m+[m[32m        return "admin/manage-users";[m[41m[m
+     }[m
+ }[m
+[1mdiff --git a/src/main/java/bg/softuni/sportsapptraining/service/UserService.java b/src/main/java/bg/softuni/sportsapptraining/service/UserService.java[m
+[1mindex b5457da..adec89f 100644[m
+[1m--- a/src/main/java/bg/softuni/sportsapptraining/service/UserService.java[m
+[1m+++ b/src/main/java/bg/softuni/sportsapptraining/service/UserService.java[m
+[36m@@ -73,9 +73,28 @@[m [mpublic class UserService {[m
+         return userRepository.findAll();[m
+     }[m
+ [m
+[31m-    public void changeUserRole(Long userId, Role newRole) {[m
+[31m-        User user = userRepository.findById(userId).orElseThrow();[m
+[32m+[m[32m    public boolean changeUserRole(Long userId, Role newRole) {[m[41m[m
+[32m+[m[32m        Optional<User> userOpt = userRepository.findById(userId);[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        if (userOpt.isEmpty()) {[m[41m[m
+[32m+[m[32m            return false;[m[41m[m
+[32m+[m[32m        }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        User user = userOpt.get();[m[41m[m
+[32m+[m[32m        if (user.getRole() == newRole) {[m[41m[m
+[32m+[m[32m            return false;[m[41m[m
+[32m+[m[32m        }[m[41m[m
+[32m+[m[41m[m
+         user.setRole(newRole);[m
+         userRepository.save(user);[m
+[32m+[m[41m[m
+[32m+[m[32m        return true;[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    public Optional<User> findUserById(Long userId) {[m[41m[m
+[32m+[m[32m        return userRepository.findById(userId);[m[41m[m
+     }[m
+ }[m
+[1mdiff --git a/src/main/resources/templates/admin-manage-users.html b/src/main/resources/templates/admin-manage-users.html[m
+[1mindex 2ab9c86..dbdc723 100644[m
+[1m--- a/src/main/resources/templates/admin-manage-users.html[m
+[1m+++ b/src/main/resources/templates/admin-manage-users.html[m
+[36m@@ -21,23 +21,21 @@[m
+         <td th:text="${user.username}"></td>[m
+         <td th:text="${user.role}"></td>[m
+         <td>[m
+[31m-            <!-- Ако потребителят е USER, покажи бутон "Make Admin" -->[m
+[31m-            <form action="/admin/change-role" method="post" th:if="${user.role.name() == 'ROLE_USER'}">[m
+[32m+[m[32m            <form action="/admin/change-role" method="post">[m[41m[m
+                 <input type="hidden" name="userId" th:value="${user.id}">[m
+[31m-                <input type="hidden" name="newRole" value="ROLE_ADMIN">[m
+[31m-                <button type="submit">Make Admin</button>[m
+[31m-            </form>[m
+[31m-[m
+[31m-            <!-- Ако потребителят е ADMIN, покажи бутон "Make User" -->[m
+[31m-            <form action="/admin/change-role" method="post" th:if="${user.role.name() == 'ROLE_ADMIN'}">[m
+[31m-                <input type="hidden" name="userId" th:value="${user.id}">[m
+[31m-                <input type="hidden" name="newRole" value="ROLE_USER">[m
+[31m-                <button type="submit" class="btn-danger">Make User</button>[m
+[32m+[m[32m                <select name="newRole">[m[41m[m
+[32m+[m[32m                    <option value="ROLE_USER" th:selected="${user.role.name() == 'ROLE_USER'}">User</option>[m[41m[m
+[32m+[m[32m                    <option value="ROLE_ADMIN" th:selected="${user.role.name() == 'ROLE_ADMIN'}">Admin</option>[m[41m[m
+[32m+[m[32m                </select>[m[41m[m
+[32m+[m[32m                <button type="submit">Change Role</button>[m[41m[m
+             </form>[m
+         </td>[m
+     </tr>[m
+     </tbody>[m
+ </table>[m
+ [m
+[32m+[m[32m<p th:if="${error}" th:text="${error}" style="color: red;"></p>[m[41m[m
+[32m+[m[32m<p th:if="${success}" th:text="${success}" style="color: green;"></p>[m[41m[m
+[32m+[m[41m[m
+ </body>[m
+ </html>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/resources/templates/home.html b/src/main/resources/templates/home.html[m
+[1mindex 320a11f..902395c 100644[m
+[1m--- a/src/main/resources/templates/home.html[m
+[1m+++ b/src/main/resources/templates/home.html[m
+[36m@@ -1,41 +1,41 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html lang="en">[m
+[31m-<head>[m
+[31m-    <meta charset="UTF-8">[m
+[31m-    <title>Title</title>[m
+[31m-    <link rel="stylesheet" href="/css/reset.css">[m
+[31m-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"[m
+[31m-          integrity="sha384-ECmqhEsG94sIeqRcxTcUf0T50eb/59vmUn2CQi4uV6OYUueHrcEwHclxFdAJltbA" crossorigin="anonymous">[m
+[31m-    <link rel="stylesheet" href="/css/style.css">[m
+[31m-</head>[m
+[31m-<body>[m
+[31m-<h1> Welcome, <span th:text="${@userSession.getUsername()}"></span></h1>[m
+[31m-[m
+[31m-[m
+[31m-<header class="header">[m
+[31m-    <nav class="header-nav">[m
+[31m-        <a th:href="@{/}">Sports App</a>[m
+[31m-<!--        <a th:href="@{/home}">-->[m
+[31m-        </a>[m
+[31m-[m
+[31m-        <article>[m
+[31m-            <ul class="header-nav-list">[m
+[31m-                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">[m
+[31m-                    <a th:href="@{/login}">Login</a>[m
+[31m-                </li>[m
+[31m-                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">[m
+[31m-                    <a th:href="@{/register}">Register</a>[m
+[31m-                </li>[m
+[31m-                <li th:if="${@userSession.isUserLoggedIn()}" class="header-nav-list-item active">[m
+[31m-                    <form th:action="@{/logout}" th:method="POST">[m
+[31m-[m
+[31m-                        <button type="submit">Logout</button>[m
+[31m-                    </form>[m
+[31m-                </li>[m
+[31m-            </ul>[m
+[31m-        </article>[m
+[31m-    </nav>[m
+[31m-</header>[m
+[31m-[m
+[31m-</body>[m
+[32m+[m[32m<!DOCTYPE html>[m[41m[m
+[32m+[m[32m<html lang="en">[m[41m[m
+[32m+[m[32m<head>[m[41m[m
+[32m+[m[32m    <meta charset="UTF-8">[m[41m[m
+[32m+[m[32m    <title>Title</title>[m[41m[m
+[32m+[m[32m    <link rel="stylesheet" href="/css/reset.css">[m[41m[m
+[32m+[m[32m    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"[m[41m[m
+[32m+[m[32m          integrity="sha384-ECmqhEsG94sIeqRcxTcUf0T50eb/59vmUn2CQi4uV6OYUueHrcEwHclxFdAJltbA" crossorigin="anonymous">[m[41m[m
+[32m+[m[32m    <link rel="stylesheet" href="/css/style.css">[m[41m[m
+[32m+[m[32m</head>[m[41m[m
+[32m+[m[32m<body>[m[41m[m
+[32m+[m[32m<h1> Welcome, <span th:text="${@userSession.getUsername()}"></span></h1>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m<header class="header">[m[41m[m
+[32m+[m[32m    <nav class="header-nav">[m[41m[m
+[32m+[m[32m        <a th:href="@{/}">Sports App</a>[m[41m[m
+[32m+[m[32m<!--        <a th:href="@{/home}">-->[m[41m[m
+[32m+[m[32m        </a>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        <article>[m[41m[m
+[32m+[m[32m            <ul class="header-nav-list">[m[41m[m
+[32m+[m[32m                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">[m[41m[m
+[32m+[m[32m                    <a th:href="@{/login}">Login</a>[m[41m[m
+[32m+[m[32m                </li>[m[41m[m
+[32m+[m[32m                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">[m[41m[m
+[32m+[m[32m                    <a th:href="@{/register}">Register</a>[m[41m[m
+[32m+[m[32m                </li>[m[41m[m
+[32m+[m[32m                <li th:if="${@userSession.isUserLoggedIn()}" class="header-nav-list-item active">[m[41m[m
+[32m+[m[32m                    <form th:action="@{/logout}" th:method="POST">[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m                        <button type="submit">Logout</button>[m[41m[m
+[32m+[m[32m                    </form>[m[41m[m
+[32m+[m[32m                </li>[m[41m[m
+[32m+[m[32m            </ul>[m[41m[m
+[32m+[m[32m        </article>[m[41m[m
+[32m+[m[32m    </nav>[m[41m[m
+[32m+[m[32m</header>[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m</body>[m[41m[m
+ </html>[m
+\ No newline at end of file[m

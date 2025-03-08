@@ -24,12 +24,39 @@ public class AdminController {
     @GetMapping("/manage-users")
     public String manageUsers(Model model) {
         model.addAttribute("users", userService.findAllUsers());
-        return "admin/manage-users";
+        return "admin-manage-users";
     }
 
+    @GetMapping("/change-role")
+    public String showChangeRolePage(@RequestParam("userId") Long userId, Model model) {
+        model.addAttribute("user", userService.findUserById(userId));
+        model.addAttribute("roles", Role.values());
+        return "admin/change-role";
+    }
+
+//    @PostMapping("/change-role")
+//    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {
+//        userService.changeUserRole(userId, Role.valueOf(newRole));
+//        return "redirect:/admin/manage-users";
+//    }
+
+
     @PostMapping("/change-role")
-    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {
-        userService.changeUserRole(userId, Role.valueOf(newRole));
-        return "redirect:/admin/manage-users";
+    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRoleStr, Model model) {
+        try {
+            Role newRole = Role.valueOf(newRoleStr);
+            boolean success = userService.changeUserRole(userId, newRole);
+
+            if (!success) {
+                model.addAttribute("error", "Invalid role or user not found.");
+            } else {
+                model.addAttribute("success", "User role updated successfully.");
+            }
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "Invalid role specified.");
+        }
+
+        model.addAttribute("users", userService.findAllUsers());
+        return "admin/manage-users";
     }
 }
