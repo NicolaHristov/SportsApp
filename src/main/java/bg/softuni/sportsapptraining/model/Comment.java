@@ -17,14 +17,25 @@ public class Comment {
 
     @Column(nullable = false)
     private LocalDateTime dateTime;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "discipline_id", nullable = false)
     private Discipline discipline;
 
+    public Comment(String content, User user, Discipline discipline) {
+        this.content = content;
+        this.user = user;
+        this.discipline = discipline;
+        this.dateTime = LocalDateTime.now();
+    }
+
     public Comment() {
+    }
+    @PrePersist
+    protected void onCreate() {
+        this.dateTime = LocalDateTime.now();
     }
 
     public long getId() {
