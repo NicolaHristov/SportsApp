@@ -1,0 +1,22 @@
+<nav class="header-nav">
+    <a th:href="@{/}">Sports App</a>
+    <!--        <a th:href="@{/home}">-->
+    </a>
+
+    <article>
+        <ul class="header-nav-list">
+            <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">
+                <a th:href="@{/login}">Login</a>
+            </li>
+            <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">
+                <a th:href="@{/register}">Register</a>
+            </li>
+            <li th:if="${@userSession.isUserLoggedIn()}" class="header-nav-list-item active">
+                <form th:action="@{/logout}" th:method="POST">
+
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </article>
+</nav>
