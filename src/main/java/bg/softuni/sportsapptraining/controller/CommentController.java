@@ -28,11 +28,27 @@ public class CommentController {
     }
 
     @GetMapping("/comments")
-    public String showComments(){
+    public String showComments(Model model){
+          List<Comment> comments = commentService.findAll();
 
+          model.addAttribute("comments",comments);
 
         return "comments";
     }
+
+    @PostMapping("/comments")
+    @PreAuthorize("isAuthenticated()")
+    public String addComment(@RequestParam String commentContent, Principal principal){
+        User user = userService.findByUsername(principal.getName());
+
+        Comment comment = new Comment();
+        comment.setUser(user);
+        comment.setContent(commentContent);
+        commentService.save(comment);
+
+        return "redirect:/comments";
+    }
+
 
 
 }

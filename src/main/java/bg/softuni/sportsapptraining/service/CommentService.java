@@ -26,4 +26,12 @@ public class CommentService {
         Comment comment = new Comment(text, user, discipline);
         commentRepository.save(comment);
     }
+
+    public List<Comment> findAll() {
+        return this.commentRepository.findAll();
+    }
+
+    public Comment save(Comment comment){
+       return this.commentRepository.save(comment);
+    }
 }
