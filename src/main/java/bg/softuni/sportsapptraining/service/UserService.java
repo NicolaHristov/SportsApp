@@ -97,4 +97,9 @@ public class UserService {
     public Optional<User> findUserById(Long userId) {
         return userRepository.findById(userId);
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + username));
+    }
 }
