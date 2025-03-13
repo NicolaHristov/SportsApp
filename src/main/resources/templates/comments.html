@@ -6,7 +6,25 @@
 </head>
 <body>
 
+<article th:if="${discipline}">
+    <h2>Comments for <span th:text="${discipline.name}"></span></h2>
+</article>
 
+
+<section th:if="${comments != null and #lists.size(comments) > 0}">
+    <article th:each="comment : ${comments}">
+        <strong><span th:text="${comment.user.username}"></span></strong>:
+        <span th:text="${comment.content}"></span>
+    </article>
+</section>
+
+<section th:if="${#authorization.expression('isAuthenticated()')}" >
+    <form method="post" action="/comments">
+        <textarea name="content" required></textarea>
+        <input type="hidden" name="disciplineId" th:value="${discipline.id}" required>
+        <button type="submit">Add Comment</button>
+    </form>
+</section>
 
 </body>
 </html>
