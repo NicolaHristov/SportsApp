@@ -15,7 +15,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/comments")
+@RequestMapping("/comments")
 public class CommentController {
     private final CommentService commentService;
     private final DisciplineService disciplineService;
@@ -32,6 +32,17 @@ public class CommentController {
           List<Comment> comments = commentService.findAll();
 
           model.addAttribute("comments",comments);
+
+        return "comments";
+    }
+
+    @GetMapping("/{disciplineId}")
+    public String showCommentsForDiscipline(@PathVariable Long disciplineId,Model model){
+        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+
+        List<Comment> commentsForDiscipline = commentService.findByDiscipline(discipline);
+        model.addAttribute("comments", commentsForDiscipline);
+        model.addAttribute("discipline",discipline);
 
         return "comments";
     }

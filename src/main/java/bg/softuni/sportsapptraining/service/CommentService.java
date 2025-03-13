@@ -34,4 +34,8 @@ public class CommentService {
     public Comment save(Comment comment){
        return this.commentRepository.save(comment);
     }
+
+    public List<Comment> findByDiscipline(Discipline discipline){
+        return commentRepository.findByDiscipline(discipline);
+    }
 }
