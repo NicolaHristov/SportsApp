@@ -27,7 +27,7 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @GetMapping("/comments")
+    @GetMapping
     public String showComments(Model model){
           List<Comment> comments = commentService.findAll();
 
@@ -47,18 +47,7 @@ public class CommentController {
         return "comments";
     }
 
-    @PostMapping("/comments")
-    @PreAuthorize("isAuthenticated()")
-    public String addComment(@RequestParam String commentContent, Principal principal){
-        User user = userService.findByUsername(principal.getName());
 
-        Comment comment = new Comment();
-        comment.setUser(user);
-        comment.setContent(commentContent);
-        commentService.save(comment);
-
-        return "redirect:/comments";
-    }
 
 
 
