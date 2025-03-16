@@ -1,8 +1,10 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.dto.AthleticsDto;
 import bg.softuni.sportsapptraining.service.AthleticsService;
+import bg.softuni.sportsapptraining.service.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 public class AthleticController {
 
 
     private final AthleticsService athleticsService;
+    private final CommentService commentService;
 
-    public AthleticController(AthleticsService athleticsService) {
+    public AthleticController(AthleticsService athleticsService, CommentService commentService) {
         this.athleticsService = athleticsService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/athletics")
@@ -33,11 +39,16 @@ public class AthleticController {
 @PostMapping("/athletics")
 public String getAthletics(@RequestParam("discipline") String discipline, Model model) {
     Discipline selectedDiscipline = athleticsService.getDisciplineByName(discipline);
+    List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
 
     String championImageUrl = getChampionImageUrl(discipline);
+
     model.addAttribute("selectedDiscipline", selectedDiscipline);
     model.addAttribute("disciplines", athleticsService.getAllDisciplines());
     model.addAttribute("championImageUrl", championImageUrl);
+    model.addAttribute("comments", comments);
+
+
     return "athletics";
 }
 
