@@ -36,8 +36,16 @@
       <form action="/athletics" method="get">
           <button type="submit" class="btn-choose">Choose Another Discipline</button>
       </form>
-
   </div>
+
+<section th:if="${comments != null and #lists.size(comments) > 0}">
+    <h3>Comments</h3>
+    <article th:each="comment : ${comments}">
+        <strong th:text="${comment.user.username}"></strong>:
+        <span th:text="${comment.content}"></span>
+        <em th:text="${#temporals.format(comment.dateTime, 'dd-MM-yyyy HH:mm')}"></em>
+    </article>
+</section>
 
 </body>
 </html>

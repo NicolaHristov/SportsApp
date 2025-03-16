@@ -33,7 +33,6 @@ public class CommentController {
 
           model.addAttribute("comments",comments);
 
-        System.out.println("Model attributes: " + model.asMap());
         return "comments";
     }
 
