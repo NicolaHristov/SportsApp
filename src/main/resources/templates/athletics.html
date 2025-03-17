@@ -47,5 +47,14 @@
     </article>
 </section>
 
+<section th:if="${#authorization.expression('isAuthenticated()')}">
+    <h3>Add a Comment</h3>
+    <form th:action="@{/comments/add}" method="post">
+        <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" required>
+        <textarea name="content" placeholder="Write your comment here..." required></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
+</section>
+
 </body>
 </html>
