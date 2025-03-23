@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -37,7 +38,7 @@ public class AthleticController {
     }
 
 @PostMapping("/athletics")
-public String getAthletics(@RequestParam("discipline") String discipline, Model model) {
+public String getAthletics(@RequestParam("discipline") String discipline, Model model, Principal principal) {
     Discipline selectedDiscipline = athleticsService.getDisciplineByName(discipline);
     List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
 
@@ -47,8 +48,7 @@ public String getAthletics(@RequestParam("discipline") String discipline, Model 
     model.addAttribute("disciplines", athleticsService.getAllDisciplines());
     model.addAttribute("championImageUrl", championImageUrl);
     model.addAttribute("comments", comments);
-
-
+    model.addAttribute("isAuthenticated", principal != null);
     return "athletics";
 }
 

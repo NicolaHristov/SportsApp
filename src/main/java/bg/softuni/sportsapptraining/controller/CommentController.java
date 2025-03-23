@@ -43,6 +43,7 @@ public class CommentController {
         List<Comment> commentsForDiscipline = commentService.findByDiscipline(discipline);
         model.addAttribute("comments", commentsForDiscipline);
         model.addAttribute("discipline",discipline);
+        model.addAttribute("selectedDiscipline", discipline);
 
         return "comments";
     }
@@ -63,7 +64,16 @@ public class CommentController {
         return "redirect:/disciplines/" + disciplineId;
     }
 
-
+//    @PostMapping("/comments/add")
+//    @PreAuthorize("isAuthenticated()")
+//    public String addComment(@RequestParam Long disciplineId, @RequestParam String content, Principal principal) {
+//        User user = userService.findByUsername(principal.getName());
+//        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+//        Comment comment = new Comment(content, user, discipline);
+//
+//        commentService.save(comment);
+//        return "redirect:/athletics";
+//    }
 
 
 }
