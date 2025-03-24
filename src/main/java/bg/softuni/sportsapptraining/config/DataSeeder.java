@@ -16,9 +16,17 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (disciplineRepository.count() == 0) {
-            disciplineRepository.save(new Discipline("100 metres", "Fred Kerley", "9.58  (Usain Bolt)"));
-            disciplineRepository.save(new Discipline("200 metres", "Noah Lyles", "19.19  (Usain Bolt)"));
+        seedDiscipline("100 metres", "Fred Kerley", "9.58 (Usain Bolt)");
+        seedDiscipline("200 metres", "Noah Lyles", "19.19 (Usain Bolt)");
+        seedDiscipline("400 metres", "Michael Norman", "43.03 (Wayde van Niekerk)");
+        seedDiscipline("800 metres", "Emmanuel Korir", "1:40.91 (David Rudisha)");
+        seedDiscipline("1500 metres", "Jakob Ingebrigtsen", "3:26.00 (Hicham El Guerrouj)");
+    }
+
+    private void seedDiscipline(String name, String champion, String record) {
+        if (!disciplineRepository.existsByName(name)) {
+            disciplineRepository.save(new Discipline(name, champion, record));
         }
     }
+
 }
