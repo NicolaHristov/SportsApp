@@ -18,7 +18,7 @@ public class DataSeeder implements CommandLineRunner {
     public void run(String... args) {
         seedDiscipline("100 metres", "Fred Kerley", "9.58 (Usain Bolt)");
         seedDiscipline("200 metres", "Noah Lyles", "19.19 (Usain Bolt)");
-        seedDiscipline("400 metres", "Michael Norman", "43.03 (Wayde van Niekerk)");
+        seedDiscipline("400 metres", "Aleksander Doom", "43.03 (Wayde van Niekerk)");
         seedDiscipline("800 metres", "Emmanuel Korir", "1:40.91 (David Rudisha)");
         seedDiscipline("1500 metres", "Jakob Ingebrigtsen", "3:26.00 (Hicham El Guerrouj)");
     }
