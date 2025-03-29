@@ -61,6 +61,10 @@
     <form action="/athletics" method="get">
         <button type="submit" class="btn-choose">Choose Another Discipline</button>
     </form>
+
+    <section th:unless="${#authorization.expression('isAuthenticated()')}">
+        <p>You must be logged in to leave a comment. <a th:href="@{/login}">Login here</a></p>
+    </section>
 </div>
 
 <!--  <div th:if="${selectedDiscipline}" class="athletics-info">-->
@@ -95,8 +99,5 @@
 <!--    </form>-->
 <!--</section>-->
 
-<section th:unless="${#authorization.expression('isAuthenticated()')}">
-    <p>You must be logged in to leave a comment. <a th:href="@{/login}">Login here</a>.</p>
-</section>
 </body>
 </html>
