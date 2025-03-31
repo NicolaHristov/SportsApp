@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<img src="http://res.cloudinary.com/dccqkyfpt/image/upload/v1743064213/gkosr9ht8puzssvhtuva.jpg"
+     alt="Uploaded Image" class="fullscreen-image">
+
+
+<div th:if="${selectedDiscipline == null}">
+    <form action="/swimming" method="post" class="swimming-form">
+        <select name="discipline">
+            <option value="" disabled selected>-- Choose discipline--</option>
+            <th:block th:each="discipline : ${disciplines}">
+                <option th:value="${discipline.name}" th:text="${discipline.name}"></option>
+            </th:block>
+        </select>
+        <button type="submit">View</button>
+    </form>
+</div>
+</body>
+</html>
