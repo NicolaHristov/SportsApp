@@ -1,6 +1,8 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
+import bg.softuni.sportsapptraining.service.CommentService;
 import bg.softuni.sportsapptraining.service.SwimmingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,14 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.util.List;
+
 @Controller
 public class SwimmingController {
 
 
     private final SwimmingService swimmingService;
+    private final CommentService commentService;
 
-    public SwimmingController(SwimmingService swimmingService) {
+    public SwimmingController(SwimmingService swimmingService, CommentService commentService) {
         this.swimmingService = swimmingService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/swimming")
@@ -26,13 +33,17 @@ public class SwimmingController {
 
 
     @PostMapping("/swimming")
-    public String getSwimming(@RequestParam ("discipline") String discipline, Model model){
+    public String getSwimming(@RequestParam ("discipline") String discipline, Model model, Principal principal){
         Discipline selectedDiscipline = swimmingService.getDisciplineByName(discipline);
+        List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
+
         String championImageUrl = getChampionImageUrl(discipline);
 
         model.addAttribute("selectedDiscipline", selectedDiscipline);
         model.addAttribute("disciplines", swimmingService.getAllDisciplines());
         model.addAttribute("championImageUrl", championImageUrl);
+        model.addAttribute("comments", comments);
+        model.addAttribute("isAuthenticated", principal != null);
 
         return "swimming";
     }
