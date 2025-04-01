@@ -21,6 +21,9 @@ public class Sport {
     public Sport() {
     }
 
+    public Sport(String sport) {
+    }
+
     public long getId() {
         return id;
     }
