@@ -21,7 +21,8 @@ public class Sport {
     public Sport() {
     }
 
-    public Sport(String sport) {
+    public Sport(String name) {
+        this.name = name;
     }
 
     public long getId() {

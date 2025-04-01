@@ -26,6 +26,9 @@ public class DataSeeder implements CommandLineRunner {
         Sport athletics = new Sport("Athletics");
         Sport swimming = new Sport("Swimming");
 
+        sportRepository.save(athletics);
+        sportRepository.save(swimming);
+
         seedDiscipline("100 metres", "Fred Kerley", "9.58 (Usain Bolt)",athletics);
         seedDiscipline("200 metres", "Noah Lyles", "19.19 (Usain Bolt)",athletics);
         seedDiscipline("400 metres", "Aleksander Doom", "43.03 (Wayde van Niekerk)",athletics);
@@ -40,7 +43,9 @@ public class DataSeeder implements CommandLineRunner {
 
     private void seedDiscipline(String name, String champion, String record, Sport sport) {
         if (!disciplineRepository.existsByName(name)) {
+
             Discipline discipline = new Discipline(name, champion, record);
+            discipline.setSport(sport);
             disciplineRepository.save(discipline);
         }
     }
