@@ -25,6 +25,24 @@ public class SwimmingController {
     }
 
 
+    @PostMapping("/swimming")
+    public String getSwimming(@RequestParam ("discipline") String discipline, Model model){
+        Discipline selectedDiscipline = swimmingService.getDisciplineByName(discipline);
+        String championImageUrl = getChampionImageUrl(discipline);
 
+        model.addAttribute("selectedDiscipline", selectedDiscipline);
+        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
+        model.addAttribute("championImageUrl", championImageUrl);
+
+        return "swimming";
+    }
+
+    private String getChampionImageUrl(String discipline) {
+        return switch (discipline) {
+            case "50m freestyle" -> " http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
+            case "100m freestyle" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496406/g1efdnkby3uk9ndevgsb.jpg";
+            default -> "https://res.cloudinary.com/default.jpg";
+        };
+    }
 
 }
