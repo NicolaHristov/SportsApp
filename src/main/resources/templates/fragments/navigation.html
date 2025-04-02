@@ -5,15 +5,15 @@
 
     <article>
         <ul class="header-nav-list">
-            <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">
+            <li class="header-nav-list-item active" th:if="${not #authorization.expression('isAuthenticated()')}">
                 <a th:href="@{/login}">Login</a>
             </li>
-            <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">
+            <li class="header-nav-list-item active" th:if="${not #authorization.expression('isAuthenticated()')}">
                 <a th:href="@{/register}">Register</a>
             </li>
-            <li th:if="${@userSession.isUserLoggedIn()}" class="header-nav-list-item active">
-                <form th:action="@{/logout}" th:method="POST">
 
+            <li th:if="${#authorization.expression('isAuthenticated()')}" class="header-nav-list-item active">
+                <form th:action="@{/logout}" method="post">
                     <button type="submit">Logout</button>
                 </form>
             </li>
