@@ -19,7 +19,7 @@ public class AthleticsService {
 
 
     public List<Discipline> getAllDisciplines() {
-        return disciplineRepository.findAll();
+        return disciplineRepository.findAllBySportName("Athletics");
     }
 
     public Discipline getDisciplineByName(String name) {
