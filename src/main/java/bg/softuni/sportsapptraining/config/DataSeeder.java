@@ -37,6 +37,11 @@ public class DataSeeder implements CommandLineRunner {
 
         seedDiscipline("50m freestyle", "Ben Proud", "20.91 (Cesar Cielo)", swimming);
         seedDiscipline("100m freestyle", "David Popovici", "46.40 (Pan Zha Le)", swimming);
+        seedDiscipline("200m freestyle", "Hwang Sun-woo", "1:42.00 (Paul Biedermann)", swimming);
+        seedDiscipline("400m freestyle", "Ahmed Hafnaoui", "3:40.00 (Paul Biedermann)", swimming);
+        seedDiscipline("50m breaststroke", "Nicolo Martinenghi", "25.95 (Adam Peaty)", swimming);
+        seedDiscipline("100m breaststroke", "Adam Peaty", "56.88 (Adam Peaty)", swimming);
+        seedDiscipline("200m breaststroke", "Dong Zhihao", "2:05.48 (Qin Haiyang )", swimming);
 
 
     }

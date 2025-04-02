@@ -50,8 +50,13 @@ public class SwimmingController {
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case "50m freestyle" -> " http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
+            case "50m freestyle" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
             case "100m freestyle" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496406/g1efdnkby3uk9ndevgsb.jpg";
+            case "200m freestyle" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593035/wdwnyhpv0xuziyol6bov.jpg";
+            case "400m freestyle" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593117/z4umctc6trkhstkg8bfq.jpg";
+            case "50m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593200/iwdolhnwfkaihmad0qqw.jpg";
+            case "100m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593302/baupzc4kgd4jqmiwtcvv.jpg";
+            case "200m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593531/rizrl65bbw2nx6j6znkc.jpg";
             default -> "https://res.cloudinary.com/default.jpg";
         };
     }
