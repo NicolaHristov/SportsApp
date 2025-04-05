@@ -1,21 +1,63 @@
+#spring:
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        format_sql: 'TRUE'
+#    hibernate:
+#      ddl-auto: update
+#    open-in-view: 'false'
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: 'true'
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: NicolaHristov13
+#    url: jdbc:mysql://localhost:3306/sport_app_training?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        type:
+#          descriptor: TRACE
+#        SQL: DEBUG
+#      nodeValue: WARN
+#    blog: WARN
+#server:
+#  port: 8080
+#cloudinary:
+#  cloud-name: dccqkyfpt
+#  api-key: 995832413948972
+#  api-secret: dnp3ZgWG92KfRF2IJv3rF-dUCuA
+
 spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.H2Dialect
         format_sql: 'TRUE'
     hibernate:
       ddl-auto: update
     open-in-view: 'false'
+
   mvc:
     hiddenmethod:
       filter:
         enabled: 'true'
+
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: NicolaHristov13
-    url: jdbc:mysql://localhost:3306/sport_app_training?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
 logging:
   level:
     org:
@@ -25,8 +67,10 @@ logging:
         SQL: DEBUG
       nodeValue: WARN
     blog: WARN
+
 server:
   port: 8080
+
 cloudinary:
   cloud-name: dccqkyfpt
   api-key: 995832413948972
