@@ -67,8 +67,7 @@ logging:
         type:
           descriptor: TRACE
         SQL: DEBUG
-      nodeValue: WARN
-    blog: WARN
+
 
 server:
   port: 8080
