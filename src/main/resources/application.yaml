@@ -33,6 +33,8 @@
 #  api-secret: dnp3ZgWG92KfRF2IJv3rF-dUCuA
 
 spring:
+  config:
+    import: optional:application-secret.yml
   jpa:
     properties:
       hibernate:
@@ -71,10 +73,6 @@ logging:
 server:
   port: 8080
 
-cloudinary:
-  cloud-name: dccqkyfpt
-  api-key: 995832413948972
-  api-secret: dnp3ZgWG92KfRF2IJv3rF-dUCuA
 
 
 
