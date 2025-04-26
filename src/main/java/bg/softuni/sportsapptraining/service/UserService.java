@@ -40,6 +40,7 @@ public class UserService {
         user.setEmail(data.getEmail());
         user.setPassword(passwordEncoder.encode(data.getPassword()));
 
+
         this.userRepository.save(user);
 
         return true;
@@ -74,21 +75,28 @@ public class UserService {
     }
 
     public boolean changeUserRole(Long userId, Role newRole) {
-        Optional<User> userOpt = userRepository.findById(userId);
-
-        if (userOpt.isEmpty()) {
-            return false;
-        }
-
-        User user = userOpt.get();
-        if (user.getRole() == newRole) {
-            return false;
-        }
-
-        user.setRole(newRole);
-        userRepository.save(user);
-
-        return true;
+        return userRepository.findById(userId)
+                .filter(user -> user.getRole() != newRole)
+                .map(user -> {
+                    user.setRole(newRole);
+                    userRepository.save(user);
+                    return true;
+                }).orElse(false);
+//        Optional<User> userOpt = userRepository.findById(userId);
+//
+//        if (userOpt.isEmpty()) {
+//            return false;
+//        }
+//
+//        User user = userOpt.get();
+//        if (user.getRole() == newRole) {
+//            return false;
+//        }
+//
+//        user.setRole(newRole);
+//        userRepository.save(user);
+//
+//        return true;
     }
 
 

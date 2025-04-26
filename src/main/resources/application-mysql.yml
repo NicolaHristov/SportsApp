@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://localhost:3306/sport_app?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
 
     username: root
-    password:
+    password: NicolaHristov13
 
   jpa:
     hibernate:

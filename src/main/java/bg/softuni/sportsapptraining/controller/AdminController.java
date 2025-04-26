@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,29 +35,14 @@ public class AdminController {
         return "admin/change-role";
     }
 
-//    @PostMapping("/change-role")
-//    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {
-//        userService.changeUserRole(userId, Role.valueOf(newRole));
-//        return "redirect:/admin/manage-users";
-//    }
+
 
 
     @PostMapping("/change-role")
-    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRoleStr, Model model) {
-        try {
-            Role newRole = Role.valueOf(newRoleStr);
-            boolean success = userService.changeUserRole(userId, newRole);
+    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {
 
-            if (!success) {
-                model.addAttribute("error", "Invalid role or user not found.");
-            } else {
-                model.addAttribute("success", "User role updated successfully.");
-            }
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", "Invalid role specified.");
-        }
+        userService.changeUserRole(userId, Role.valueOf(newRole));
 
-        model.addAttribute("users", userService.findAllUsers());
-        return "admin/manage-users";
+        return "redirect:/admin/manage-users";
     }
 }
