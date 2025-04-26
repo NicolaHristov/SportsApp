@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body>
@@ -18,7 +17,8 @@
             <input class="inputForm" type="text"  id="username" name="username" th:field="*{username}">
 
             <label class="labelForm" for="password">Password</label>
-            <input class="inputForm" type="password" id="password" name="password">
+            <input class="inputForm" type="password" id="password" name="password" th:field="*{password}">
+
 
             <button type="submit" class="register-button">Login</button>
         </fieldset>
