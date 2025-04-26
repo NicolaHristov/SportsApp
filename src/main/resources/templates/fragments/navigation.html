@@ -1,9 +1,5 @@
 <nav class="header-nav">
     <a th:href="@{/}">Sports App</a>
-    <!--        <a th:href="@{/home}">-->
-    </a>
-
-    <article>
         <ul class="header-nav-list">
             <li class="header-nav-list-item active" th:if="${not #authorization.expression('isAuthenticated()')}">
                 <a th:href="@{/login}">Login</a>
@@ -18,5 +14,4 @@
                 </form>
             </li>
         </ul>
-    </article>
 </nav>

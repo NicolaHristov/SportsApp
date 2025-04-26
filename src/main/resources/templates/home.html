@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
    <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body>
 <h1> Welcome, <span th:text="${@userSession.getUsername()}"></span></h1>
-<header th:include="fragments/navigation">
-</header>
+<header th:replace="fragments/navigation"></header>
 
 <!--<header class="header">-->
 <!--    <nav class="header-nav">-->
