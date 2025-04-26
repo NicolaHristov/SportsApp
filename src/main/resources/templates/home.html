@@ -4,33 +4,10 @@
    <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body>
+
 <h1> Welcome, <span th:text="${@userSession.getUsername()}"></span></h1>
+
 <header th:replace="fragments/navigation"></header>
-
-<!--<header class="header">-->
-<!--    <nav class="header-nav">-->
-<!--        <a th:href="@{/}">Sports App</a>-->
-<!--&lt;!&ndash;        <a th:href="@{/home}">&ndash;&gt;-->
-<!--        </a>-->
-
-<!--        <article>-->
-<!--            <ul class="header-nav-list">-->
-<!--                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">-->
-<!--                    <a th:href="@{/login}">Login</a>-->
-<!--                </li>-->
-<!--                <li class="header-nav-list-item active"  th:unless="${@userSession.isUserLoggedIn()}">-->
-<!--                    <a th:href="@{/register}">Register</a>-->
-<!--                </li>-->
-<!--                <li th:if="${@userSession.isUserLoggedIn()}" class="header-nav-list-item active">-->
-<!--                    <form th:action="@{/logout}" th:method="POST">-->
-
-<!--                        <button type="submit">Logout</button>-->
-<!--                    </form>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </article>-->
-<!--    </nav>-->
-<!--</header>-->
 
 </body>
 </html>
