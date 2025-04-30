@@ -7,7 +7,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(AdminUserProperties.class)
-
 public class SportsAppTrainingApplication {
 
     public static void main(String[] args) {
