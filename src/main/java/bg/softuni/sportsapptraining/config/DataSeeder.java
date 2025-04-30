@@ -69,6 +69,16 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void seedAdminUser() {
+        String username = adminUserProperties.getUsername();
+        String email = adminUserProperties.getEmail();
+        String rawPassword = adminUserProperties.getPassword();
+
+        if (username == null || email == null || rawPassword == null) {
+            System.err.println("Admin user not created: missing configuration in application-secret.yml.");
+            return;
+        }
+
+
         if (userRepository.findByUsername(adminUserProperties.getUsername()).isEmpty()) {
             User admin = new User();
             admin.setUsername(adminUserProperties.getUsername());
