@@ -55,6 +55,7 @@ public class DataSeeder implements CommandLineRunner {
         seedDiscipline("100m breaststroke", "Adam Peaty", "56.88 (Adam Peaty)", swimming);
         seedDiscipline("200m breaststroke", "Dong Zhihao", "2:05.48 (Qin Haiyang )", swimming);
 
+
         seedAdminUser();
     }
 
