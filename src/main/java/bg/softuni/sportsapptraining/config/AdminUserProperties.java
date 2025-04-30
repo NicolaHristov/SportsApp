@@ -1,10 +1,8 @@
 package bg.softuni.sportsapptraining.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
 @ConfigurationProperties(prefix = "admin")
 public class AdminUserProperties {
 
