@@ -57,7 +57,7 @@ public class SwimmingController {
             case "50m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593200/iwdolhnwfkaihmad0qqw.jpg";
             case "100m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593302/baupzc4kgd4jqmiwtcvv.jpg";
             case "200m breaststroke" -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593531/rizrl65bbw2nx6j6znkc.jpg";
-            default -> "https://res.cloudinary.com/default.jpg";
+            default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1746034357/qt7a1jxfx2ciznle3pli.jpg";
         };
     }
 
