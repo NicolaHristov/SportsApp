@@ -1,6 +1,7 @@
 spring:
   config:
-    import: optional:application-secret.yml
+    import: optional:file:/etc/secrets/application-secret.yml
+
   jpa:
     properties:
       hibernate:
