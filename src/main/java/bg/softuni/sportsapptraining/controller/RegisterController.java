@@ -54,20 +54,17 @@ public class RegisterController {
         boolean passwordDiff = data.getPassword().equals(data.getConfirmPassword());
 
         if(!passwordDiff){
-//            redirectAttributes.addFlashAttribute("registerData",data);
+
             redirectAttributes.addFlashAttribute("passError",true);
 
             return "redirect:/register";
         }
-
-        
 
          boolean success = userService.register(data);
 
         if(!success){
             return "redirect:/register";
         }
-
 
         return "redirect:/login";
     }

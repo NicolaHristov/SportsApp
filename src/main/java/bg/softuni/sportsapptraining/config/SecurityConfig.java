@@ -33,11 +33,11 @@ public class SecurityConfig {
                             .requestMatchers("/admin/**").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
-                    .formLogin(login -> login
-                            .loginPage("/login")
-                            .defaultSuccessUrl("/", true)
-                            .permitAll()
-                    )
+//                    .formLogin(login -> login
+//                            .loginPage("/login")
+//                            .defaultSuccessUrl("/home", true)
+//                            .permitAll()
+//                    )
                     .logout(logout -> logout
                             .logoutUrl("/logout")
                             .logoutSuccessUrl("/")
@@ -47,6 +47,12 @@ public class SecurityConfig {
 
             return http.build();
         }
+
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return new CustomUserDetailsService(userRepository);
+    }
 
 
 

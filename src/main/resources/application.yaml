@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:file:/etc/secrets/application-secret.yml
+    import: application-secret.yml
 
   jpa:
     properties:
