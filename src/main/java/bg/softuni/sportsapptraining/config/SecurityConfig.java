@@ -31,6 +31,7 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.POST, "/swimming").permitAll()
                             .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                             .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/comments").authenticated()
                             .anyRequest().authenticated()
                     )
 //                    .formLogin(login -> login

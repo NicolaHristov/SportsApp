@@ -32,9 +32,9 @@
             <img th:src="${championImageUrl}" alt="Champion Image" class="champion-image">
         </div>
 
-        <div class="comment-section" th:if="${#authorization.expression('isAuthenticated()')}">
+        <div class="comment-section" th:if="${isLogged}">
             <h3>Add a Comment</h3>
-            <form th:action="@{/comments/add}" method="post">
+            <form th:action="@{/comments}" method="post">
                 <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" required>
                 <textarea name="content" placeholder="Write your comment here..." required></textarea>
                 <button type="submit">Add Comment</button>
@@ -58,7 +58,7 @@
         <button type="submit" class="btn-choose">Choose Another Discipline</button>
     </form>
 
-    <section th:unless="${#authorization.expression('isAuthenticated()')}">
+    <section th:unless="${isLogged}">
         <p>You must be logged in to leave a comment. <a th:href="@{/login}">Login here</a></p>
     </section>
 </div>

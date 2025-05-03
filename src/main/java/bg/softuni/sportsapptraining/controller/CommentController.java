@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.User;
@@ -21,10 +22,12 @@ public class CommentController {
     private final DisciplineService disciplineService;
     private final UserService userService;
 
-    public CommentController(CommentService commentService, DisciplineService disciplineService, UserService userService) {
+    private final UserSession userSession;
+    public CommentController(CommentService commentService, DisciplineService disciplineService, UserService userService, UserSession userSession) {
         this.commentService = commentService;
         this.disciplineService = disciplineService;
         this.userService = userService;
+        this.userSession = userSession;
     }
 
     @GetMapping
@@ -32,6 +35,7 @@ public class CommentController {
           List<Comment> comments = commentService.findAll();
 
           model.addAttribute("comments",comments);
+          model.addAttribute("isLogged", userSession.isUserLoggedIn());
 
         return "comments";
     }
@@ -44,7 +48,7 @@ public class CommentController {
         model.addAttribute("comments", commentsForDiscipline);
         model.addAttribute("discipline",discipline);
         model.addAttribute("selectedDiscipline", discipline);
-
+        model.addAttribute("isLogged", userSession.isUserLoggedIn());
         return "comments";
     }
 

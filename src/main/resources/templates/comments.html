@@ -18,7 +18,7 @@
     </article>
 </section>
 
-<section th:if="${#authorization.expression('isAuthenticated()')}" >
+<section th:if="${isLogged}" >
     <form method="post" action="/comments">
         <textarea name="content" required></textarea>
         <input type="hidden" name="disciplineId" th:if="${discipline != null}" th:value="${discipline.id}" required>

@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.dto.AthleticsDto;
@@ -24,15 +25,19 @@ public class AthleticController {
 
     private final AthleticsService athleticsService;
     private final CommentService commentService;
+    private final UserSession userSession;
 
-    public AthleticController(AthleticsService athleticsService, CommentService commentService) {
+
+    public AthleticController(AthleticsService athleticsService, CommentService commentService, UserSession userSession) {
         this.athleticsService = athleticsService;
         this.commentService = commentService;
+        this.userSession = userSession;
     }
 
     @GetMapping("/athletics")
     public String athletics(Model model){
         model.addAttribute("disciplines", athleticsService.getAllDisciplines());
+        model.addAttribute("isLogged", userSession.isUserLoggedIn());
 
         return "athletics";
     }
@@ -49,6 +54,8 @@ public String getAthletics(@RequestParam("discipline") String discipline, Model 
     model.addAttribute("championImageUrl", championImageUrl);
     model.addAttribute("comments", comments);
     model.addAttribute("isAuthenticated", principal != null);
+    model.addAttribute("isLogged", userSession.isUserLoggedIn());
+
     return "athletics";
 }
 
