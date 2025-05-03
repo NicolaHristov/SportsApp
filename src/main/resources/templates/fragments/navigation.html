@@ -1,17 +1,18 @@
-<nav class="header-nav">
-    <a th:href="@{/}">Sports App</a>
+<header class="header">
+    <nav class="header-nav">
         <ul class="header-nav-list">
-            <li class="header-nav-list-item active" th:if="${not #authorization.expression('isAuthenticated()')}">
+            <li class="header-nav-list-item active" th:if="${not @userSession.isUserLoggedIn()}">
                 <a th:href="@{/login}">Login</a>
             </li>
-            <li class="header-nav-list-item active" th:if="${not #authorization.expression('isAuthenticated()')}">
+            <li class="header-nav-list-item active" th:if="${not @userSession.isUserLoggedIn()}">
                 <a th:href="@{/register}">Register</a>
             </li>
 
-            <li th:if="${#authorization.expression('isAuthenticated()')}" class="header-nav-list-item active">
+            <li class="header-nav-list-item active" th:if="${@userSession.isUserLoggedIn()}">
                 <form th:action="@{/logout}" method="post">
                     <button type="submit">Logout</button>
                 </form>
             </li>
         </ul>
-</nav>
+    </nav>
+</header>
