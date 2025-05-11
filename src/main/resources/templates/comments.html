@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
+
 <body>
 
 <article th:if="${discipline}">
     <h2>Comments for <span th:text="${discipline.name}"></span></h2>
 </article>
-
 
 <section th:if="${comments != null and #lists.size(comments) > 0}">
     <article th:each="comment : ${comments}">
@@ -18,7 +20,7 @@
     </article>
 </section>
 
-<section th:if="${isLogged}" >
+<section sec:authorize="isAuthenticated()">
     <form method="post" action="/comments">
         <textarea name="content" required></textarea>
         <input type="hidden" name="disciplineId" th:if="${discipline != null}" th:value="${discipline.id}" required>

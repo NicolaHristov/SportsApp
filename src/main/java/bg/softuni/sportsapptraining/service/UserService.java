@@ -1,6 +1,5 @@
 package bg.softuni.sportsapptraining.service;
 
-import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
@@ -17,12 +16,10 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserSession userSession;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserSession userSession, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userSession = userSession;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -36,39 +33,40 @@ public class UserService {
         User user = new User();
 
         user.setUsername(data.getUsername());
-        user.setPassword(data.getPassword());
         user.setEmail(data.getEmail());
+        user.setRole(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(data.getPassword()));
 
 
         this.userRepository.save(user);
 
+        System.out.println("[DEBUG] Успешно запазен в базата!");
         return true;
     }
 
-    public boolean login(UserLoginDto data) {
-        Optional<User> byUsername = userRepository.findByUsername(data.getUsername());
+//    public boolean login(UserLoginDto data) {
+//        Optional<User> byUsername = userRepository.findByUsername(data.getUsername());
+//
+//       if(byUsername.isEmpty()){
+//           return false;
+//       }
+//
+//       User user = byUsername.get();
+//
+//        boolean passMatch = passwordEncoder.matches(data.getPassword(), user.getPassword());
+//
+//        if (!passMatch) {
+//            return false;
+//        }
+//
+////        userSession.login(user);
+//
+//        return true;
+//    }
 
-       if(byUsername.isEmpty()){
-           return false;
-       }
-
-       User user = byUsername.get();
-
-        boolean passMatch = passwordEncoder.matches(data.getPassword(), user.getPassword());
-
-        if (!passMatch) {
-            return false;
-        }
-
-        userSession.login(user);
-
-        return true;
-    }
-
-    public void logout() {
-         userSession.logout();
-    }
+//    public void logout() {
+////         userSession.logout();
+//    }
 
     public List<User> findAllUsers(){
         return userRepository.findAll();

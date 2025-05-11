@@ -1,6 +1,5 @@
 package bg.softuni.sportsapptraining.controller;
 
-import bg.softuni.sportsapptraining.config.UserSession;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.User;
@@ -22,33 +21,33 @@ public class CommentController {
     private final DisciplineService disciplineService;
     private final UserService userService;
 
-    private final UserSession userSession;
-    public CommentController(CommentService commentService, DisciplineService disciplineService, UserService userService, UserSession userSession) {
+    public CommentController(CommentService commentService, DisciplineService disciplineService, UserService userService) {
         this.commentService = commentService;
         this.disciplineService = disciplineService;
         this.userService = userService;
-        this.userSession = userSession;
+
     }
 
     @GetMapping
-    public String showComments(Model model){
+    public String showComments(Model model,Principal principal){
           List<Comment> comments = commentService.findAll();
 
           model.addAttribute("comments",comments);
-          model.addAttribute("isLogged", userSession.isUserLoggedIn());
+          model.addAttribute("isLogged", principal != null);
 
         return "comments";
     }
 
     @GetMapping("/{disciplineId}")
-    public String showCommentsForDiscipline(@PathVariable Long disciplineId,Model model){
+    public String showCommentsForDiscipline(@PathVariable Long disciplineId,Model model,Principal principal){
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
 
         List<Comment> commentsForDiscipline = commentService.findByDiscipline(discipline);
         model.addAttribute("comments", commentsForDiscipline);
         model.addAttribute("discipline",discipline);
         model.addAttribute("selectedDiscipline", discipline);
-        model.addAttribute("isLogged", userSession.isUserLoggedIn());
+        model.addAttribute("isLogged", principal != null);
+
         return "comments";
     }
 
@@ -58,14 +57,11 @@ public class CommentController {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
         User user = userService.findByUsername(principal.getName());
 
-        Comment comment = new Comment();
-        comment.setContent(content);
-        comment.setUser(user);
-        comment.setDiscipline(discipline);
+        Comment comment = new Comment(content, user, discipline);
 
         commentService.save(comment);
 
-        return "redirect:/disciplines/" + disciplineId;
+        return "redirect:/home";
     }
 
 //    @PostMapping("/comments/add")

@@ -1,45 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 
 <body>
-<header class="header">
-    <article class="header-logo">
-        <h1 class="header-logo-site-title">
-            SportsApp
-        </h1>
-        <h3 class="header-logo-site-source">
-            BY TEMPLATED
-        </h3>
-        <ul class="header-nav-list-sports">
-            <li class="header-nav-list-item">
-                <a th:href="@{/athletics}" class="header-nav-list-item-link">Athletics</a>
-            </li>
-            <li class="header-nav-list-item">
-                <a th:href="@{/swimming}" class="header-nav-list-item-link">Swimming</a>
-            </li>
-        </ul>
-    </article>
 
-    <nav class="header-nav">
-        <ul class="header-nav-list">
-            <li class="header-nav-list-item active">
-                <a th:href="@{/register}" class="header-nav-list-item-link">
-                   REGISTER
-                </a>
-            </li>
-            <li class="header-nav-list-item">
-                <a th:href="@{/login}" class="header-nav-list-item-link">
-                    LOGIN
-                </a>
-            </li>
+<th:block th:replace="~{fragments/navigation}"></th:block>
 
-        </ul>
-
-    </nav>
-
-</header>
 </body>
 </html>

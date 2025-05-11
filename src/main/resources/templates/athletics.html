@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
-<body>
 
+<body>
 
 <img src="http://res.cloudinary.com/dccqkyfpt/image/upload/v1740828648/hya7q1nzmoawerw68spu.jpg"
      alt="Uploaded Image" class="fullscreen-image">
-
 
 <div th:if="${selectedDiscipline == null}">
     <form action="/athletics" method="post" class="athletics-form">
@@ -32,7 +34,7 @@
             <img th:src="${championImageUrl}" alt="Champion Image" class="champion-image">
         </div>
 
-        <div class="comment-section" th:if="${isLogged}">
+        <div class="comment-section" sec:authorize="isAuthenticated()">
             <h3>Add a Comment</h3>
             <form th:action="@{/comments}" method="post">
                 <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" required>
@@ -52,15 +54,17 @@
                 </article>
             </section>
         </div>
+
+        <section sec:authorize="isAnonymous()">
+            <p>You must be logged in to leave a comment.
+                <a th:href="@{/login}">Login here</a>
+            </p>
+        </section>
     </div>
 
     <form action="/athletics" method="get">
         <button type="submit" class="btn-choose">Choose Another Discipline</button>
     </form>
-
-    <section th:unless="${isLogged}">
-        <p>You must be logged in to leave a comment. <a th:href="@{/login}">Login here</a></p>
-    </section>
 </div>
 
 </body>

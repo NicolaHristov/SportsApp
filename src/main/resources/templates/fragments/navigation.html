@@ -1,18 +1,37 @@
 <header class="header">
+    <article class="header-logo">
+        <h1 class="header-logo-site-title">
+            SportsApp
+        </h1>
+        <h3 class="header-logo-site-source">
+            BY TEMPLATED
+        </h3>
+
+        <ul class="header-nav-list-sports">
+            <li class="header-nav-list-item">
+                <a th:href="@{/athletics}" class="header-nav-list-item-link">Athletics</a>
+            </li>
+            <li class="header-nav-list-item">
+                <a th:href="@{/swimming}" class="header-nav-list-item-link">Swimming</a>
+            </li>
+        </ul>
+    </article>
+
     <nav class="header-nav">
         <ul class="header-nav-list">
-            <li class="header-nav-list-item active" th:if="${not @userSession.isUserLoggedIn()}">
-                <a th:href="@{/login}">Login</a>
+            <li class="header-nav-list-item" sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="header-nav-list-item-link">Login</a>
             </li>
-            <li class="header-nav-list-item active" th:if="${not @userSession.isUserLoggedIn()}">
-                <a th:href="@{/register}">Register</a>
+            <li class="header-nav-list-item" sec:authorize="isAnonymous()">
+                <a th:href="@{/register}" class="header-nav-list-item-link">Register</a>
             </li>
-
-            <li th:if="${@userSession.isUserLoggedIn()}">
-                <form th:action="@{/logout}" method="post">
+            <li class="header-nav-list-item" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="logout-form">
                     <button type="submit" class="logout-button">Logout</button>
                 </form>
             </li>
+
         </ul>
     </nav>
 </header>
+

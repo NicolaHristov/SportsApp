@@ -7,6 +7,7 @@ import bg.softuni.sportsapptraining.service.SwimmingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,10 +25,16 @@ public class SwimmingController {
         this.swimmingService = swimmingService;
         this.commentService = commentService;
     }
+    @ModelAttribute("isLogged")
+    public boolean isLogged(Principal principal) {
+        return principal != null;
+    }
+
 
     @GetMapping("/swimming")
-    public String swimming(Model model){
+    public String swimming(Model model, Principal principal){
         model.addAttribute("disciplines", swimmingService.getAllDisciplines());
+        model.addAttribute("isLogged", principal != null);
         return "swimming";
     }
 
@@ -43,7 +50,7 @@ public class SwimmingController {
         model.addAttribute("disciplines", swimmingService.getAllDisciplines());
         model.addAttribute("championImageUrl", championImageUrl);
         model.addAttribute("comments", comments);
-        model.addAttribute("isAuthenticated", principal != null);
+//        model.addAttribute("isAuthenticated", principal != null);
 
         return "swimming";
     }

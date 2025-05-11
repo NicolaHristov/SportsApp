@@ -1,6 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
-import bg.softuni.sportsapptraining.config.UserSession;
+
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.dto.AthleticsDto;
@@ -25,19 +25,23 @@ public class AthleticController {
 
     private final AthleticsService athleticsService;
     private final CommentService commentService;
-    private final UserSession userSession;
 
 
-    public AthleticController(AthleticsService athleticsService, CommentService commentService, UserSession userSession) {
+    public AthleticController(AthleticsService athleticsService, CommentService commentService) {
         this.athleticsService = athleticsService;
         this.commentService = commentService;
-        this.userSession = userSession;
     }
 
+    @ModelAttribute("isLogged")
+    public boolean isLogged(Principal principal) {
+        return principal != null;
+    }
+
+
     @GetMapping("/athletics")
-    public String athletics(Model model){
+    public String athletics(Model model,Principal principal){
         model.addAttribute("disciplines", athleticsService.getAllDisciplines());
-        model.addAttribute("isLogged", userSession.isUserLoggedIn());
+        model.addAttribute("isLogged", principal != null);
 
         return "athletics";
     }
@@ -53,8 +57,7 @@ public String getAthletics(@RequestParam("discipline") String discipline, Model 
     model.addAttribute("disciplines", athleticsService.getAllDisciplines());
     model.addAttribute("championImageUrl", championImageUrl);
     model.addAttribute("comments", comments);
-    model.addAttribute("isAuthenticated", principal != null);
-    model.addAttribute("isLogged", userSession.isUserLoggedIn());
+    model.addAttribute("isLogged", principal != null);
 
     return "athletics";
 }
