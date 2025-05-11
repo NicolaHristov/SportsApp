@@ -24,11 +24,12 @@ import java.security.Principal;
 @Controller
 public class LoginController {
 
-    я
+    private final AuthenticationManager authenticationManager;
 
     public LoginController(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+
 
     @ModelAttribute("loginData")
     public UserLoginDto loginDto() {
