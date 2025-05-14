@@ -51,7 +51,7 @@ public class CommentController {
         return "comments";
     }
 
-        @PostMapping
+        @PostMapping("/add")
         @PreAuthorize("isAuthenticated()")
         public String addComment(@RequestParam String content,@RequestParam Long disciplineId,Principal principal){
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
@@ -61,7 +61,9 @@ public class CommentController {
 
         commentService.save(comment);
 
-        return "redirect:/home";
+        String sportPath = discipline.getSport().getName().toLowerCase();
+
+        return "redirect:/" + sportPath + "?discipline=" + discipline.getName();
     }
 
 //    @PostMapping("/comments/add")

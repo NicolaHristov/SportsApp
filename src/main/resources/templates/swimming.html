@@ -9,11 +9,11 @@
 
 <body>
 
-<img src="http://res.cloudinary.com/dccqkyfpt/image/upload/v1743509747/ylwsworebvzhcebovapu.jpg"
-     alt="Uploaded Image" class="fullscreen-image">
+<img th:src="@{http://res.cloudinary.com/dccqkyfpt/image/upload/v1743509747/ylwsworebvzhcebovapu.jpg}"
+     alt="Uploaded Image" class="fullscreen-image" />
 
 <div th:if="${selectedDiscipline == null}">
-    <form action="/swimming" method="post" class="athletics-form">
+    <form th:action="@{/swimming}" th:method="post" class="athletics-form">
         <select name="discipline">
             <option value="" disabled selected>-- Choose discipline--</option>
             <th:block th:each="discipline : ${disciplines}">
@@ -24,20 +24,20 @@
     </form>
 </div>
 
-<div th:if="${selectedDiscipline}" class="discipline-info-box">
+<div th:if="${selectedDiscipline != null}" class="discipline-info-box">
     <h2 th:text="'Discipline: ' + ${selectedDiscipline.name}"></h2>
     <p th:text="'World champion: ' + ${selectedDiscipline.worldRecordHolder}"></p>
     <p th:text="'World record: ' + ${selectedDiscipline.worldRecordTime}"></p>
 
     <div class="discipline-wrapper">
         <div class="discipline-image">
-            <img th:src="${championImageUrl}" alt="Champion Image" class="champion-image">
+            <img th:src="${championImageUrl}" alt="Champion Image" class="champion-image" />
         </div>
 
         <div class="comment-section" sec:authorize="isAuthenticated()">
             <h3>Add a Comment</h3>
-            <form th:action="@{/comments/add}" method="post">
-                <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" required>
+            <form th:action="@{/comments/add}" th:method="post" sec:csrf>
+                <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" />
                 <textarea name="content" placeholder="Write your comment here..." required></textarea>
                 <button type="submit">Add Comment</button>
             </form>
@@ -49,14 +49,15 @@
                         <strong th:text="${comment.user.username}">Username</strong>:
                         <span th:text="${comment.content}">Content</span>
                     </p>
-                    <p class="comment-date" th:text="${#temporals.format(comment.dateTime, 'dd MMM yyyy HH:mm')}"></p>
-                    <hr>
+                    <p class="comment-date"
+                       th:text="${#temporals.format(comment.dateTime, 'dd MMM yyyy HH:mm')}"></p>
+                    <hr />
                 </article>
             </section>
         </div>
     </div>
 
-    <form action="/swimming" method="get">
+    <form th:action="@{/swimming}" th:method="get">
         <button type="submit" class="btn-choose">Choose Another Discipline</button>
     </form>
 
