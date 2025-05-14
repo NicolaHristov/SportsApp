@@ -51,9 +51,9 @@ public class CommentController {
         return "comments";
     }
 
-    @PostMapping
-    @PreAuthorize("isAuthenticated()")
-    public String addComment(@RequestParam String content,@RequestParam Long disciplineId,Principal principal){
+        @PostMapping
+        @PreAuthorize("isAuthenticated()")
+        public String addComment(@RequestParam String content,@RequestParam Long disciplineId,Principal principal){
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
         User user = userService.findByUsername(principal.getName());
 

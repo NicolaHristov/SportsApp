@@ -2,6 +2,9 @@ package bg.softuni.sportsapptraining.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name ="disciplines")
 public class Discipline {
@@ -22,6 +25,15 @@ public class Discipline {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Sport sport;
+
+
+
+    @OneToMany(
+            mappedBy = "discipline",
+            cascade = CascadeType.REMOVE,
+            orphanRemoval = true
+    )
+    private List<Comment> comments = new ArrayList<>();
 
     public Discipline() {
     }
@@ -70,5 +82,12 @@ public class Discipline {
 
     public void setSport(Sport sport) {
         this.sport = sport;
+    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
