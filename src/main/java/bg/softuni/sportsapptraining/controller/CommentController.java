@@ -25,35 +25,34 @@ public class CommentController {
         this.commentService = commentService;
         this.disciplineService = disciplineService;
         this.userService = userService;
-
     }
 
     @GetMapping
-    public String showComments(Model model,Principal principal){
-          List<Comment> comments = commentService.findAll();
+    public String showComments(Model model, Principal principal) {
+        List<Comment> comments = commentService.findAll();
 
-          model.addAttribute("comments",comments);
-          model.addAttribute("isLogged", principal != null);
+        model.addAttribute("comments", comments);
+        model.addAttribute("isLogged", principal != null);
 
         return "comments";
     }
 
     @GetMapping("/{disciplineId}")
-    public String showCommentsForDiscipline(@PathVariable Long disciplineId,Model model,Principal principal){
+    public String showCommentsForDiscipline(@PathVariable Long disciplineId, Model model, Principal principal) {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
 
         List<Comment> commentsForDiscipline = commentService.findByDiscipline(discipline);
         model.addAttribute("comments", commentsForDiscipline);
-        model.addAttribute("discipline",discipline);
+        model.addAttribute("discipline", discipline);
         model.addAttribute("selectedDiscipline", discipline);
         model.addAttribute("isLogged", principal != null);
 
         return "comments";
     }
 
-        @PostMapping("/add")
-        @PreAuthorize("isAuthenticated()")
-        public String addComment(@RequestParam String content,@RequestParam Long disciplineId,Principal principal){
+    @PostMapping("/add")
+    @PreAuthorize("isAuthenticated()")
+    public String addComment(@RequestParam String content, @RequestParam Long disciplineId, Principal principal) {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
         User user = userService.findByUsername(principal.getName());
 

@@ -1,9 +1,7 @@
 package bg.softuni.sportsapptraining.controller;
 
 
-import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.UserLoginDto;
-import bg.softuni.sportsapptraining.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -69,6 +67,7 @@ public class LoginController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             HttpSession session = request.getSession(true);
+
             session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
 
@@ -82,11 +81,10 @@ public class LoginController {
 
 
     @PostMapping("/logout")
-    public String logout(){
+    public String logout() {
         SecurityContextHolder.clearContext();
         return "redirect:/";
     }
-
 
 
 }

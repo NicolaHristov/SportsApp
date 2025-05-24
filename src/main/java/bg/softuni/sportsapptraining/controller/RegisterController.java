@@ -19,18 +19,17 @@ public class RegisterController {
     private final UserService userService;
 
 
-
     public RegisterController(UserService userService) {
         this.userService = userService;
     }
 
     @ModelAttribute("registerData")
-    public RegisterDto registerDto(){
+    public RegisterDto registerDto() {
         return new RegisterDto();
     }
 
     @GetMapping("/register")
-    public String register(Principal principal){
+    public String register(Principal principal) {
         if (principal != null) {
             return "redirect:/home";
         }
@@ -38,15 +37,15 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@Valid RegisterDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes, Principal principal){
+    public String doRegister(@Valid RegisterDto data, BindingResult bindingResult, RedirectAttributes redirectAttributes, Principal principal) {
 
         if (principal != null) {
             return "redirect:/home";
         }
 
-        if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("registerData",data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData",bindingResult);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("registerData", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
             return "redirect:/register";
         }
@@ -56,9 +55,9 @@ public class RegisterController {
             return "redirect:/register";
         }
 
-         boolean success = userService.register(data);
+        boolean success = userService.register(data);
 
-        if(!success){
+        if (!success) {
             return "redirect:/register";
         }
 

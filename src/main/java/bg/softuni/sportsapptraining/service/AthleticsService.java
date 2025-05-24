@@ -1,21 +1,17 @@
 package bg.softuni.sportsapptraining.service;
 
 import bg.softuni.sportsapptraining.model.Discipline;
-import bg.softuni.sportsapptraining.model.dto.AthleticsDto;
 import bg.softuni.sportsapptraining.repository.DisciplineRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AthleticsService {
 
     private final DisciplineRepository disciplineRepository;
-
-    public AthleticsService(DisciplineRepository disciplineRepository) {
-        this.disciplineRepository = disciplineRepository;
-    }
-
 
 
     public List<Discipline> getAllDisciplines() {

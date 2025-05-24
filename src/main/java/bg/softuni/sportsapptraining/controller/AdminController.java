@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,14 +27,12 @@ public class AdminController {
         return "admin-manage-users";
     }
 
-    @GetMapping("/change-role")
-    public String showChangeRolePage(@RequestParam("userId") Long userId, Model model) {
-        model.addAttribute("user", userService.findUserById(userId));
-        model.addAttribute("roles", Role.values());
-        return "admin/change-role";
-    }
-
-
+//    @GetMapping("/change-role")
+//    public String showChangeRolePage(@RequestParam("userId") Long userId, Model model) {
+//        model.addAttribute("user", userService.findUserById(userId));
+//        model.addAttribute("roles", Role.values());
+//        return "admin/change-role";
+//    }
 
 
     @PostMapping("/change-role")

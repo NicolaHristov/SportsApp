@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
@@ -21,7 +21,7 @@
             <td th:text="${user.username}"></td>
             <td th:text="${user.role}"></td>
             <td>
-                <form action="/admin/change-role" method="post" style="display: flex; justify-content: center; gap: 10px;">
+                <form action="/admin/change-role" method="post" style="display: flex; justify-content: center; gap: 10px;" sec:csrf>
                     <input type="hidden" name="userId" th:value="${user.id}">
                     <select name="newRole">
                         <option value="ROLE_USER" th:selected="${user.role.name() == 'ROLE_USER'}">User</option>
@@ -34,8 +34,7 @@
         </tbody>
     </table>
 
-    <p th:if="${error}" th:text="${error}" style="color: red; text-align: center; margin-top: 20px;"></p>
-    <p th:if="${success}" th:text="${success}" style="color: green; text-align: center; margin-top: 20px;"></p>
+
 </div>
 </body>
 </html>

@@ -68,6 +68,9 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
+    /**
+     *
+     */
     private void seedAdminUser() {
         if (userRepository.findByUsername(adminUserProperties.getUsername()).isEmpty()) {
             User admin = new User();
