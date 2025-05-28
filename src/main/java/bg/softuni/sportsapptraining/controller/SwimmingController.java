@@ -6,15 +6,13 @@ import bg.softuni.sportsapptraining.service.CommentService;
 import bg.softuni.sportsapptraining.service.SwimmingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
 
 @Controller
+@RequestMapping("/swimming")
 public class SwimmingController {
 
 
@@ -32,29 +30,54 @@ public class SwimmingController {
     }
 
 
-    @GetMapping("/swimming")
-    public String swimming(Model model, Principal principal) {
+//    @GetMapping("/swimming")
+//    public String swimming(Model model, Principal principal) {
+//        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
+//        model.addAttribute("isLogged", principal != null);
+//        return "swimming";
+//    }
+
+    @GetMapping
+    public String showSwimming(
+            @RequestParam(name = "disciplineId", required = false) Long disciplineId,
+            Model model) {
+
         model.addAttribute("disciplines", swimmingService.getAllDisciplines());
-        model.addAttribute("isLogged", principal != null);
+
+        if (disciplineId != null) {
+            Discipline selected = swimmingService.getDisciplineById(disciplineId);
+            List<Comment> comments = commentService.findByDiscipline(selected);
+
+            model.addAttribute("selectedDiscipline", selected);
+            model.addAttribute("comments", comments);
+            model.addAttribute("championImageUrl",
+                    getChampionImageUrl(selected.getName()));
+        }
+
         return "swimming";
     }
 
-
-    @PostMapping("/swimming")
-    public String getSwimming(@RequestParam("discipline") String discipline, Model model, Principal principal) {
-        Discipline selectedDiscipline = swimmingService.getDisciplineByName(discipline);
-        List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
-
-        String championImageUrl = getChampionImageUrl(discipline);
-
-        model.addAttribute("selectedDiscipline", selectedDiscipline);
-        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
-        model.addAttribute("championImageUrl", championImageUrl);
-        model.addAttribute("comments", comments);
-//        model.addAttribute("isAuthenticated", principal != null);
-
-        return "swimming";
+    @PostMapping
+    public String selectDiscipline(@RequestParam("discipline") String disciplineName) {
+        Discipline selected = swimmingService.getDisciplineByName(disciplineName);
+        return "redirect:/swimming?disciplineId=" + selected.getId();
     }
+
+//    @PostMapping("/swimming")
+//    public String getSwimming(@RequestParam("discipline") String discipline, Model model, Principal principal) {
+//        Discipline selectedDiscipline = swimmingService.getDisciplineByName(discipline);
+//        List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
+//
+//        String championImageUrl = getChampionImageUrl(discipline);
+//
+//        model.addAttribute("selectedDiscipline", selectedDiscipline);
+//        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
+//        model.addAttribute("championImageUrl", championImageUrl);
+//        model.addAttribute("comments", comments);
+////        model.addAttribute("isAuthenticated", principal != null);
+//
+//        return "swimming";
+//    }
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {

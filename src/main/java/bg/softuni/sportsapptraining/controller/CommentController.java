@@ -62,7 +62,11 @@ public class CommentController {
 
         String sportPath = discipline.getSport().getName().toLowerCase();
 
-        return "redirect:/" + sportPath + "?discipline=" + discipline.getName();
+        return "redirect:/" + sportPath + "?disciplineId=" + discipline.getId();
+
+//        return "redirect:/athletics?disciplineId=" + discipline.getId();
+
+//        return "redirect:/comments/" + discipline.getId();
     }
 
 //    @PostMapping("/comments/add")

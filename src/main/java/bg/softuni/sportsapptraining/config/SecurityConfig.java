@@ -25,35 +25,70 @@
     @EnableMethodSecurity
     public class SecurityConfig {
 
+//        @Bean
+//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//            http
+//                    .csrf(AbstractHttpConfigurer::disable)
+//                    .authorizeHttpRequests(auth -> auth
+//                            .requestMatchers("/", "/home", "/index", "/register", "/upload", "/athletics", "/swimming", "/login").permitAll()
+//                            .requestMatchers(HttpMethod.POST, "/register").permitAll()
+//                            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+//                            .requestMatchers("/admin/**").hasRole("ADMIN")
+//                            .requestMatchers(HttpMethod.POST, "/comments").authenticated()
+//                            .anyRequest().authenticated()
+//                    )
+//    //                .formLogin(login -> login
+//    //                        .loginPage("/login")
+//    //                        .defaultSuccessUrl("/home", true)
+//    //                        .failureUrl("/login?error=true")
+//    //                        .permitAll()
+//    //                )
+//                    .logout(logout -> logout
+//                            .logoutUrl("/logout")
+//                            .logoutSuccessUrl("/")
+//                            .permitAll()
+//                    )
+//                    .sessionManagement(session -> session
+//                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//                    );
+//
+//            return http.build();
+//        }
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
-                    .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/", "/home", "/index", "/register", "/upload", "/athletics", "/swimming", "/login").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                            .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.GET,
+                                    "/", "/home", "/index", "/login", "/register",
+                                    "/athletics", "/swimming",
+                                    "/css/**", "/js/**", "/images/**"
+                            ).permitAll()
+                            .requestMatchers(HttpMethod.POST, "/athletics", "/swimming").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                             .requestMatchers(HttpMethod.POST, "/comments").authenticated()
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
-    //                .formLogin(login -> login
-    //                        .loginPage("/login")
-    //                        .defaultSuccessUrl("/home", true)
-    //                        .failureUrl("/login?error=true")
-    //                        .permitAll()
-    //                )
-                    .logout(logout -> logout
-                            .logoutUrl("/logout")
-                            .logoutSuccessUrl("/")
+                    .formLogin(form -> form
+                            .loginPage("/login")
+                            .loginProcessingUrl("/login")
+                            .defaultSuccessUrl("/home", true)
                             .permitAll()
                     )
-                    .sessionManagement(session -> session
-                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+
+                    .logout(logout -> logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/home")
+                            .permitAll()
+                    )
+                    .sessionManagement(sess ->
+                            sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                     );
 
             return http.build();
         }
+
 
         @Bean
         public PasswordEncoder passwordEncoder() {

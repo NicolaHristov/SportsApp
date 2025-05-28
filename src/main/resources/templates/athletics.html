@@ -10,17 +10,19 @@
 <body>
 
 <img th:src="@{http://res.cloudinary.com/dccqkyfpt/image/upload/v1740828648/hya7q1nzmoawerw68spu.jpg}"
-     alt="Uploaded Image" class="fullscreen-image" />
+     alt="Uploaded Image"
+     class="fullscreen-image"/>
 
 <div th:if="${selectedDiscipline == null}">
     <form th:action="@{/athletics}" th:method="post" class="athletics-form">
-        <select name="discipline">
-            <option value="" disabled selected>-- Choose discipline--</option>
+        <select name="discipline" required>
+            <option value="" disabled selected>-- Choose discipline --</option>
             <th:block th:each="discipline : ${disciplines}">
                 <option th:value="${discipline.name}" th:text="${discipline.name}"></option>
             </th:block>
         </select>
         <button type="submit">View</button>
+        <a th:href="@{/home}" class="btn-return">Return</a>
     </form>
 </div>
 
@@ -31,19 +33,15 @@
 
     <div class="discipline-wrapper">
         <div class="discipline-image">
-            <img th:src="${championImageUrl}" alt="Champion Image" class="champion-image" />
+            <img th:src="${championImageUrl}"
+                 alt="Champion Image"
+                 class="champion-image"/>
         </div>
 
-        <div class="comment-section" sec:authorize="isAuthenticated()">
-            <h3>Add a Comment</h3>
-            <form th:action="@{/comments/add}" th:method="post" sec:csrf>
-                <input type="hidden" name="disciplineId" th:value="${selectedDiscipline.id}" />
-                <textarea name="content" placeholder="Write your comment here..." required></textarea>
-                <button type="submit">Add Comment</button>
-            </form>
-
-            <section th:if="${comments != null and #lists.size(comments) > 0}" class="comments-section">
-                <h3>All Comments</h3>
+        <div class="discipline-comments">
+            <h3>All Comments</h3>
+            <section th:if="${comments != null and !#lists.isEmpty(comments)}"
+                     class="comments-section">
                 <article th:each="comment : ${comments}">
                     <p>
                         <strong th:text="${comment.user.username}">Username</strong>:
@@ -51,16 +49,28 @@
                     </p>
                     <p class="comment-date"
                        th:text="${#temporals.format(comment.dateTime, 'dd MMM yyyy HH:mm')}"></p>
-                    <hr />
+                    <hr/>
                 </article>
             </section>
-        </div>
 
-        <section sec:authorize="isAnonymous()">
-            <p>You must be logged in to leave a comment.
-                <a th:href="@{/login}">Login here</a>
-            </p>
-        </section>
+            <div sec:authorize="isAuthenticated()" class="comment-section">
+                <h3>Add a Comment</h3>
+                <form th:action="@{/comments/add}" th:method="post" sec:csrf>
+                    <input type="hidden" name="disciplineId"
+                           th:value="${selectedDiscipline.id}"/>
+                    <textarea name="content"
+                              placeholder="Write your comment here…"
+                              required></textarea>
+                    <button type="submit">Add Comment</button>
+                </form>
+            </div>
+
+            <div sec:authorize="isAnonymous()" class="login-prompt">
+                <p>You must be logged in to leave a comment.
+                    <a th:href="@{/login}">Login here</a>
+                </p>
+            </div>
+        </div>
     </div>
 
     <form th:action="@{/athletics}" th:method="get">

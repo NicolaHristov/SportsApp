@@ -111,14 +111,16 @@ main {
     margin-top: 15px;
 }
 .discipline-info-box {
-    background-color: rgba(0, 0, 0, 0.7); /* тъмен прозрачен фон */
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 20px;
     border-radius: 12px;
     text-align: center;
-    max-width: 600px;
-    margin: 20px auto;
+
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
 }
 
 .discipline-info-box h2 {
@@ -132,7 +134,14 @@ main {
     margin: 4px 0;
 }
 
-
+.comments-section {
+  max-height: 250px;    /* контейнерът расте до 250px, после scroll */
+  overflow-y: auto;     /* вертикален скрол */
+  overflow-x: hidden;   /* без хоризонтален скрол */
+  margin-top: 1rem;
+  padding-right: 0.5rem;
+  border-top: 1px solid #ddd;
+}
 
 
 
@@ -156,6 +165,10 @@ main {
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
+.discipline-image {
+  flex: 0 0 45%;
+  max-width: 500px;
+}
 
 .discipline-image img {
     max-width: 500px;
@@ -169,16 +182,16 @@ main {
     align-items: flex-start;
     gap: 40px;
     margin-top: 30px;
-    flex-wrap: wrap;
 }
 .comment-section {
-    flex: 1;
+      flex: 0 0 45%;
+      min-width: 300px;
+      max-width: 500px;
     background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 12px;
-    min-width: 300px;
-    max-width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    align-self: flex-start;
 }
 
 .comment-section h3 {
@@ -228,8 +241,8 @@ main {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    background-color: #007bff; /* Син цвят */
-    color: white; /* Бял текст */
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -238,7 +251,7 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* По-тъмен син при ховър */
+    background-color: #0056b3;
 }
 
 
@@ -279,10 +292,6 @@ fieldset {
     border: none;
 }
 .header{
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    /*padding: 20px 70px;*/
-    /*align-items: center;*/
     position: fixed;
     top: 0;
     left: 0;
@@ -317,7 +326,7 @@ fieldset {
 .header-nav {
     flex-grow: 1;
     display: flex;
-    justify-content: flex-end; /* избутва бутоните наляво */
+    justify-content: flex-end;
 }
 .header-nav-list-sports{
     padding-right: 15px;
@@ -336,6 +345,7 @@ fieldset {
     background: #ECECEC;
     padding: 18px;
     margin: 0 1px;
+    border-radius: 12px;
 
 }
 .header-nav-list-item-link{
@@ -423,4 +433,14 @@ fieldset {
 
 .manage-table button:hover {
     background-color: #cc0000;
+}
+.btn-return {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
 }

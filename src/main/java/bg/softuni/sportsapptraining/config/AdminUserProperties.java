@@ -11,8 +11,6 @@ public class AdminUserProperties {
     private String email;
     private String password;
 
-    public AdminUserProperties() {
-    }
 
     public String getUsername() {
         return username;

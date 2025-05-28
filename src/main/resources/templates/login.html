@@ -1,25 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
 <body>
 
 <main>
-    <form th:action="@{/login}" method="post" class="login-form">
+    <form th:action="@{/login}"
+          method="post"
+          class="login-form">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}" />
+
         <fieldset>
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" required>
+            <input type="text"
+                   name="username"
+                   id="username"
+                   required />
 
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password"
+                   name="password"
+                   id="password"
+                   required />
 
-            <button type="submit"  class="register-button">Login</button>
+            <button type="submit" class="register-button">Login</button>
 
-            <p th:if="${param.error}" class="text-danger">Invalid username or password.</p>
+            <p th:if="${param.error}" class="text-danger">
+                Invalid username or password.
+            </p>
+
+            <p th:if="${param.logout}" class="text-success">
+                You have been logged out.
+            </p>
         </fieldset>
     </form>
 </main>
+
+</body>
+</html>
 
 
 

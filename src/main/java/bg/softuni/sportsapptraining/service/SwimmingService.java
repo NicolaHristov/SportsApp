@@ -21,4 +21,10 @@ public class SwimmingService {
     public Discipline getDisciplineByName(String name) {
         return disciplineRepository.findByName(name);
     }
+    public Discipline getDisciplineById(Long id) {
+        return disciplineRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Discipline with id " + id + " not found"));
+    }
 }
