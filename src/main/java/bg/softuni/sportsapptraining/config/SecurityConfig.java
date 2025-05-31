@@ -67,7 +67,7 @@
                             .requestMatchers(HttpMethod.POST, "/athletics", "/swimming").permitAll()
                             .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                             .requestMatchers(HttpMethod.POST, "/comments").authenticated()
-                            .requestMatchers("/admin/**").hasRole("ADMIN")
+                            .requestMatchers("/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                             .anyRequest().authenticated()
                     )
                     .formLogin(form -> form
