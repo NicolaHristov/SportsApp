@@ -28,15 +28,6 @@ public class AdminController {
         model.addAttribute("users", userService.findAllUsers());
         return "admin-manage-users";
     }
-
-//    @GetMapping("/change-role")
-//    public String showChangeRolePage(@RequestParam("userId") Long userId, Model model) {
-//        model.addAttribute("user", userService.findUserById(userId));
-//        model.addAttribute("roles", Role.values());
-//        return "admin/change-role";
-//    }
-
-
     @PostMapping("/change-role")
     public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) throws AccessDeniedException {
 
