@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.nio.file.AccessDeniedException;
+
 @Controller
 @RequestMapping("/admin")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
 public class AdminController {
 
     private final UserService userService;
@@ -36,7 +38,7 @@ public class AdminController {
 
 
     @PostMapping("/change-role")
-    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) {
+    public String changeUserRole(@RequestParam("userId") Long userId, @RequestParam("newRole") String newRole) throws AccessDeniedException {
 
         userService.changeUserRole(userId, Role.valueOf(newRole));
 
