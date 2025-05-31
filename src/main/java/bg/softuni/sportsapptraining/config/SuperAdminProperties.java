@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "admin")
-public class AdminUserProperties {
+@ConfigurationProperties(prefix = "app.superadmin")
+public class SuperAdminProperties {
 
     private String username;
     private String email;

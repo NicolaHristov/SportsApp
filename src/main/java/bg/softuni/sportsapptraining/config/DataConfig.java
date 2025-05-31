@@ -6,7 +6,6 @@ import bg.softuni.sportsapptraining.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,20 +13,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class DataConfig {
 
     @Bean
-    public CommandLineRunner seedAdmin(UserRepository userRepo, PasswordEncoder encoder, AdminUserProperties props, Environment env) {
-
+    public CommandLineRunner seedSuperAdmin(UserRepository userRepo,
+                                            PasswordEncoder encoder,
+                                            SuperAdminProperties props) {
         return args -> {
             if (userRepo.findByUsername(props.getUsername()).isEmpty()) {
-                User admin = new User();
-                admin.setUsername(props.getUsername());
-                admin.setEmail(props.getEmail());
-                admin.setPassword(encoder.encode(props.getPassword()));
-                admin.setRole(Role.ROLE_ADMIN);
-                userRepo.save(admin);
+                User superAdmin = new User();
+                superAdmin.setUsername(props.getUsername());
+                superAdmin.setEmail(props.getEmail());
+                superAdmin.setPassword(encoder.encode(props.getPassword()));
+                superAdmin.setRole(Role.ROLE_SUPER_ADMIN);
+                userRepo.save(superAdmin);
             }
         };
     }
-
-
 
 }
