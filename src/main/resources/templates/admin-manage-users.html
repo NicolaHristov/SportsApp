@@ -7,6 +7,12 @@
 </head>
 <body>
 <div class="manage-container">
+
+    <div th:if="${errorMessage}"
+         th:text="${errorMessage}">
+    </div>
+
+
     <h2>Manage Users</h2>
     <table class="manage-table">
         <thead>
