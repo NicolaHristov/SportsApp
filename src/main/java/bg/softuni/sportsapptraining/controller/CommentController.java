@@ -63,22 +63,5 @@ public class CommentController {
         String sportPath = discipline.getSport().getName().toLowerCase();
 
         return "redirect:/" + sportPath + "?disciplineId=" + discipline.getId();
-
-//        return "redirect:/athletics?disciplineId=" + discipline.getId();
-
-//        return "redirect:/comments/" + discipline.getId();
     }
-
-//    @PostMapping("/comments/add")
-//    @PreAuthorize("isAuthenticated()")
-//    public String addComment(@RequestParam Long disciplineId, @RequestParam String content, Principal principal) {
-//        User user = userService.findByUsername(principal.getName());
-//        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
-//        Comment comment = new Comment(content, user, discipline);
-//
-//        commentService.save(comment);
-//        return "redirect:/athletics";
-//    }
-
-
 }
