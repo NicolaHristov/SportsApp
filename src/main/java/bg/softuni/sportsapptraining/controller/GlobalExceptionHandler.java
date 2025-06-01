@@ -10,22 +10,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
-    public String handleAccessDenied(AccessDeniedException ex,
-                                     RedirectAttributes attrs) {
+    public String handleAccessDenied(AccessDeniedException ex, RedirectAttributes attrs) {
         attrs.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/admin/manage-users";
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public String handleNotFound(EntityNotFoundException ex,
-                                 RedirectAttributes attrs) {
+    public String handleNotFound(EntityNotFoundException ex, RedirectAttributes attrs) {
         attrs.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/admin/manage-users";
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public String handleBadRequest(IllegalArgumentException ex,
-                                   RedirectAttributes attrs) {
+    public String handleBadRequest(IllegalArgumentException ex, RedirectAttributes attrs) {
         attrs.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/admin/manage-users";
     }

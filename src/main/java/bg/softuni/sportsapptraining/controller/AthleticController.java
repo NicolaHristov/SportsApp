@@ -36,19 +36,8 @@ public class AthleticController {
         return principal != null;
     }
 
-
-//    @GetMapping("/athletics")
-//    public String athletics(Model model, Principal principal) {
-//        model.addAttribute("disciplines", athleticsService.getAllDisciplines());
-//        model.addAttribute("isLogged", principal != null);
-//
-//        return "athletics";
-//    }
-
     @GetMapping("/athletics")
-    public String athletics(
-            @RequestParam(name = "disciplineId", required = false) Long disciplineId,
-            Model model) {
+    public String athletics(@RequestParam(name = "disciplineId", required = false) Long disciplineId, Model model) {
 
         model.addAttribute("disciplines", athleticsService.getAllDisciplines());
 
@@ -70,23 +59,6 @@ public class AthleticController {
         Discipline selected = athleticsService.getDisciplineByName(disciplineName);
         return "redirect:/athletics?disciplineId=" + selected.getId();
     }
-
-//    @PostMapping("/athletics")
-//    public String getAthletics(@RequestParam("discipline") String discipline, Model model, Principal principal) {
-//        Discipline selectedDiscipline = athleticsService.getDisciplineByName(discipline);
-//        List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
-//
-//        String championImageUrl = getChampionImageUrl(discipline);
-//
-//        model.addAttribute("selectedDiscipline", selectedDiscipline);
-//        model.addAttribute("disciplines", athleticsService.getAllDisciplines());
-//        model.addAttribute("championImageUrl", championImageUrl);
-//        model.addAttribute("comments", comments);
-//        model.addAttribute("isLogged", principal != null);
-//
-//        return "athletics";
-//    }
-
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
             case "100 metres" ->
