@@ -22,12 +22,8 @@ import java.security.Principal;
 @Controller
 public class LoginController {
 
-    private final AuthenticationManager authenticationManager;
-
-    public LoginController(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+    public LoginController() {
     }
-
 
     @ModelAttribute("loginData")
     public UserLoginDto loginDto() {
@@ -46,45 +42,9 @@ public class LoginController {
         }
         return "login";
     }
-
-
-//    @PostMapping("/login")
-//    public String doLogin(@Valid @ModelAttribute("loginData") UserLoginDto data,
-//                          BindingResult bindingResult,
-//                          RedirectAttributes redirectAttributes, HttpServletRequest request) {
-//
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("loginData", data);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
-//            return "redirect:/login";
-//        }
-//
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword())
-//            );
-//
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//            HttpSession session = request.getSession(true);
-//
-//            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-//
-//
-//            return "redirect:/home";
-//
-//        } catch (AuthenticationException ex) {
-//            redirectAttributes.addFlashAttribute("loginError", true);
-//            return "redirect:/login";
-//        }
-//    }
-
-
     @PostMapping("/logout")
     public String logout() {
         SecurityContextHolder.clearContext();
         return "redirect:/";
     }
-
-
 }
