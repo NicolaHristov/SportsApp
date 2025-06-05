@@ -1,6 +1,7 @@
 package bg.softuni.sportsapptraining.controller;
 
 
+import bg.softuni.sportsapptraining.constant.DisciplineConstants;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.service.AthleticsService;
@@ -61,15 +62,15 @@ public class AthleticController {
     }
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case "100 metres" ->
+            case DisciplineConstants.DISCIPLINE_100_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093942/suiya5avwujwytzjhwhg.jpg";
-            case "200 metres" ->
+            case DisciplineConstants.DISCIPLINE_200_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
-            case "400 metres" ->
+            case DisciplineConstants.DISCIPLINE_400_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743063472/i1hbomubigi0ssaud9va.jpg";
-            case "800 metres" ->
+            case DisciplineConstants.DISCIPLINE_800_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743063960/yszfgpng9brwa246gaqy.jpg";
-            case "1500 metres" ->
+            case DisciplineConstants.DISCIPLINE_1500_METRES ->
                     " http://res.cloudinary.com/dccqkyfpt/image/upload/v1743064213/gkosr9ht8puzssvhtuva.jpg";
             default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
         };
