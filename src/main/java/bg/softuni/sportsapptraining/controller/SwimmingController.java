@@ -29,14 +29,6 @@ public class SwimmingController {
         return principal != null;
     }
 
-
-//    @GetMapping("/swimming")
-//    public String swimming(Model model, Principal principal) {
-//        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
-//        model.addAttribute("isLogged", principal != null);
-//        return "swimming";
-//    }
-
     @GetMapping
     public String showSwimming(
             @RequestParam(name = "disciplineId", required = false) Long disciplineId,
@@ -62,22 +54,6 @@ public class SwimmingController {
         Discipline selected = swimmingService.getDisciplineByName(disciplineName);
         return "redirect:/swimming?disciplineId=" + selected.getId();
     }
-
-//    @PostMapping("/swimming")
-//    public String getSwimming(@RequestParam("discipline") String discipline, Model model, Principal principal) {
-//        Discipline selectedDiscipline = swimmingService.getDisciplineByName(discipline);
-//        List<Comment> comments = commentService.findByDiscipline(selectedDiscipline);
-//
-//        String championImageUrl = getChampionImageUrl(discipline);
-//
-//        model.addAttribute("selectedDiscipline", selectedDiscipline);
-//        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
-//        model.addAttribute("championImageUrl", championImageUrl);
-//        model.addAttribute("comments", comments);
-////        model.addAttribute("isAuthenticated", principal != null);
-//
-//        return "swimming";
-//    }
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
