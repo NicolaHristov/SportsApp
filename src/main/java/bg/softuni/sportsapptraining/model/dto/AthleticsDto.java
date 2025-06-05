@@ -14,4 +14,5 @@ public class AthleticsDto {
     private String discipline;
     private String worldChampion;
     private String worldRecord;
+
 }

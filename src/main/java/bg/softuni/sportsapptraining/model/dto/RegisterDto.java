@@ -22,4 +22,5 @@ public class RegisterDto {
     @Size(min = 3, max = 20)
     private String password;
     private String confirmPassword;
+
 }
