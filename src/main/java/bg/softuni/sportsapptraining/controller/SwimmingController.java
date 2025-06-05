@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.constant.DisciplineConstants;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.service.CommentService;
@@ -56,19 +57,19 @@ public class SwimmingController {
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case "50m freestyle" ->
+            case  DisciplineConstants.FREESTYLE_50M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
-            case "100m freestyle" ->
+            case  DisciplineConstants.FREESTYLE_100M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496406/g1efdnkby3uk9ndevgsb.jpg";
-            case "200m freestyle" ->
+            case  DisciplineConstants.FREESTYLE_200M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593035/wdwnyhpv0xuziyol6bov.jpg";
-            case "400m freestyle" ->
+            case  DisciplineConstants.FREESTYLE_400M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593117/z4umctc6trkhstkg8bfq.jpg";
-            case "50m breaststroke" ->
+            case  DisciplineConstants.BREAST_50M->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593200/iwdolhnwfkaihmad0qqw.jpg";
-            case "100m breaststroke" ->
+            case  DisciplineConstants.BREAST_100M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593302/baupzc4kgd4jqmiwtcvv.jpg";
-            case "200m breaststroke" ->
+            case DisciplineConstants.BREAST_200M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593531/rizrl65bbw2nx6j6znkc.jpg";
             default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1746034357/qt7a1jxfx2ciznle3pli.jpg";
         };
