@@ -14,8 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/swimming")
 public class SwimmingController {
-
-
     private final SwimmingService swimmingService;
     private final CommentService commentService;
 
@@ -54,6 +52,7 @@ public class SwimmingController {
         Discipline selected = swimmingService.getDisciplineByName(disciplineName);
         return "redirect:/swimming?disciplineId=" + selected.getId();
     }
+
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {

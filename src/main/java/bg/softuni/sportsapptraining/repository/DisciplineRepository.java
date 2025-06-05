@@ -13,7 +13,5 @@ public interface DisciplineRepository extends JpaRepository<Discipline,Long> {
 
     Optional<Discipline> findById(Long id);
     boolean existsByName(String name);
-
-//    Optional<Discipline> findByName(String name);
     List<Discipline> findAllBySportName(String name);
 }
