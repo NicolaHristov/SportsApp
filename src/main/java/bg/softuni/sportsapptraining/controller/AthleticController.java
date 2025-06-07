@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.List;
 
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Athletics.*;
+
 @Controller
 public class AthleticController {
 
@@ -62,15 +64,15 @@ public class AthleticController {
     }
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case DisciplineConstants.DISCIPLINE_100_METRES ->
+            case ATHLETICS_HUNDRED_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093942/suiya5avwujwytzjhwhg.jpg";
-            case DisciplineConstants.DISCIPLINE_200_METRES ->
+            case ATHLETICS_TWO_HUNDRED_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
-            case DisciplineConstants.DISCIPLINE_400_METRES ->
+            case ATHLETICS_FOUR_HUNDRED_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743063472/i1hbomubigi0ssaud9va.jpg";
-            case DisciplineConstants.DISCIPLINE_800_METRES ->
+            case ATHLETICS_EIGHT_HUNDRED_METRES ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743063960/yszfgpng9brwa246gaqy.jpg";
-            case DisciplineConstants.DISCIPLINE_1500_METRES ->
+            case ATHLETICS_FIFTEEN_HUNDRED_METRES ->
                     " http://res.cloudinary.com/dccqkyfpt/image/upload/v1743064213/gkosr9ht8puzssvhtuva.jpg";
             default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1741093975/m3dg3cubn6svejxcxaj1.jpg";
         };
