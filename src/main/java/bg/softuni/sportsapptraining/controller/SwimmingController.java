@@ -1,6 +1,7 @@
 package bg.softuni.sportsapptraining.controller;
 
 import bg.softuni.sportsapptraining.constant.DisciplineConstants;
+import bg.softuni.sportsapptraining.constant.ImageUrlConstants;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.service.CommentService;
@@ -13,6 +14,7 @@ import java.security.Principal;
 import java.util.List;
 
 import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.*;
+import static bg.softuni.sportsapptraining.constant.ImageUrlConstants.Swimming.*;
 
 @Controller
 @RequestMapping("/swimming")
@@ -59,21 +61,19 @@ public class SwimmingController {
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case  SWIMMING_FREESTYLE_50M  ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
-            case  SWIMMING_FREESTYLE_100M ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496406/g1efdnkby3uk9ndevgsb.jpg";
+            case  SWIMMING_FREESTYLE_50M  -> FREESTYLE_50M_URL;
+            case  SWIMMING_FREESTYLE_100M -> FREESTYLE_100M_URL;
             case  SWIMMING_FREESTYLE_200M ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593035/wdwnyhpv0xuziyol6bov.jpg";
+                    FREESTYLE_200M_URL;
             case  SWIMMING_FREESTYLE_400M->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593117/z4umctc6trkhstkg8bfq.jpg";
+                    FREESTYLE_400M_URL;
             case  SWIMMING_BREASTSTROKE_50M ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593200/iwdolhnwfkaihmad0qqw.jpg";
+                    BREASTSTROKE_50M_URL ;
             case  SWIMMING_BREASTSTROKE_100M ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593302/baupzc4kgd4jqmiwtcvv.jpg";
+                    BREASTSTROKE_100M_URL;
             case SWIMMING_BREASTSTROKE_200M ->
-                    "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593531/rizrl65bbw2nx6j6znkc.jpg";
-            default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1746034357/qt7a1jxfx2ciznle3pli.jpg";
+                    BREASTSTROKE_200M_URL;
+            default -> DEFAULT_URL;
         };
     }
 
