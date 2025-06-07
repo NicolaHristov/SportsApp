@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.constant.ViewNames;
 import bg.softuni.sportsapptraining.model.Comment;
 import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.model.User;
@@ -34,7 +35,7 @@ public class CommentController {
         model.addAttribute("comments", comments);
         model.addAttribute("isLogged", principal != null);
 
-        return "comments";
+        return ViewNames.COMMENTS;
     }
 
     @GetMapping("/{disciplineId}")
@@ -47,7 +48,7 @@ public class CommentController {
         model.addAttribute("selectedDiscipline", discipline);
         model.addAttribute("isLogged", principal != null);
 
-        return "comments";
+        return ViewNames.COMMENTS;
     }
 
     @PostMapping("/add")
