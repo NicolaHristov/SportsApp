@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.*;
+
 @Controller
 @RequestMapping("/swimming")
 public class SwimmingController {
@@ -57,19 +59,19 @@ public class SwimmingController {
 
     private String getChampionImageUrl(String discipline) {
         return switch (discipline) {
-            case  DisciplineConstants.FREESTYLE_50M ->
+            case  SWIMMING_FREESTYLE_50M  ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496341/rnh11d92uf5zz92i2sxi.jpg";
-            case  DisciplineConstants.FREESTYLE_100M ->
+            case  SWIMMING_FREESTYLE_100M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743496406/g1efdnkby3uk9ndevgsb.jpg";
-            case  DisciplineConstants.FREESTYLE_200M ->
+            case  SWIMMING_FREESTYLE_200M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593035/wdwnyhpv0xuziyol6bov.jpg";
-            case  DisciplineConstants.FREESTYLE_400M ->
+            case  SWIMMING_FREESTYLE_400M->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593117/z4umctc6trkhstkg8bfq.jpg";
-            case  DisciplineConstants.BREAST_50M->
+            case  SWIMMING_BREASTSTROKE_50M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593200/iwdolhnwfkaihmad0qqw.jpg";
-            case  DisciplineConstants.BREAST_100M ->
+            case  SWIMMING_BREASTSTROKE_100M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593302/baupzc4kgd4jqmiwtcvv.jpg";
-            case DisciplineConstants.BREAST_200M ->
+            case SWIMMING_BREASTSTROKE_200M ->
                     "http://res.cloudinary.com/dccqkyfpt/image/upload/v1743593531/rizrl65bbw2nx6j6znkc.jpg";
             default -> "http://res.cloudinary.com/dccqkyfpt/image/upload/v1746034357/qt7a1jxfx2ciznle3pli.jpg";
         };
