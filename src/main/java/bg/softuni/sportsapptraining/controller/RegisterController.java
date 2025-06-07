@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.controller;
 
+import bg.softuni.sportsapptraining.constant.ViewNames;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.service.UserService;
 import jakarta.validation.Valid;
@@ -47,18 +48,18 @@ public class RegisterController {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
-            return "redirect:/register";
+            return ViewNames.REDIRECT_REGISTER;
         }
 
         if (!data.getPassword().equals(data.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("passError", true);
-            return "redirect:/register";
+            return ViewNames.REDIRECT_REGISTER;
         }
 
         boolean success = userService.register(data);
 
         if (!success) {
-            return "redirect:/register";
+            return ViewNames.REDIRECT_REGISTER;
         }
 
         return "redirect:/login";
