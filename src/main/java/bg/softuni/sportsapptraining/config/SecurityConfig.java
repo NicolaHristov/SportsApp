@@ -68,6 +68,7 @@
                             .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                             .requestMatchers(HttpMethod.POST, "/comments").authenticated()
                             .requestMatchers("/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
+                            .requestMatchers("/upload", "/upload-form").authenticated()
                             .anyRequest().authenticated()
                     )
                     .formLogin(form -> form
