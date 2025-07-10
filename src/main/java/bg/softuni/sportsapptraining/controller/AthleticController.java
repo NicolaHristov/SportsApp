@@ -54,7 +54,7 @@ public class AthleticController {
             model.addAttribute("selectedDiscipline", selected);
             model.addAttribute("comments", comments);
             model.addAttribute("championImageUrl",
-                    getChampionImageUrl(selected.getName()));
+                    athleticsService.getChampionImageUrl(selected.getName()));
         }
 
         return "athletics";
@@ -65,19 +65,5 @@ public class AthleticController {
         Discipline selected = athleticsService.getDisciplineByName(disciplineName);
         return "redirect:/athletics?disciplineId=" + selected.getId();
     }
-    private String getChampionImageUrl(String discipline) {
-        return switch (discipline) {
-            case ATHLETICS_HUNDRED_METRES ->
-                    HUNDRED_METRES_URL;
-            case ATHLETICS_TWO_HUNDRED_METRES ->
-                    TWO_HUNDRED_METRES_URL;
-            case ATHLETICS_FOUR_HUNDRED_METRES ->
-                   FOUR_HUNDRED_METRES_URL;
-            case ATHLETICS_EIGHT_HUNDRED_METRES ->
-                    EIGHT_HUNDRED_METRES_URL;
-            case ATHLETICS_FIFTEEN_HUNDRED_METRES ->
-                    FIFTEEN_HUNDRED_METRES_URL;
-            default -> DEFAULT_URL;
-        };
-    }
+
 }
