@@ -1,5 +1,6 @@
 package bg.softuni.sportsapptraining.service;
 
+import bg.softuni.sportsapptraining.constant.ExceptionMessages;
 import bg.softuni.sportsapptraining.model.User;
 import bg.softuni.sportsapptraining.model.dto.RegisterDto;
 import bg.softuni.sportsapptraining.model.enums.Role;
@@ -16,6 +17,8 @@ import org.springframework.security.access.AccessDeniedException;
 
 import java.util.List;
 import java.util.Optional;
+
+import static bg.softuni.sportsapptraining.constant.ExceptionMessages.*;
 
 @Service
 @RequiredArgsConstructor
@@ -53,20 +56,20 @@ public class UserService {
         String actorUsername = auth.getName();
         User actor = userRepository.findByUsername(actorUsername)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Actor not found: " + actorUsername));
+                        ACTOR_NOT_FOUND + actorUsername));
 
         User target = userRepository.findById(targetUserId)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Target user not found: " + targetUserId));
+                        TARGET_USER_NOT_FOUND + targetUserId));
 
         if (target.getRole() == Role.ROLE_SUPER_ADMIN) {
             throw new AccessDeniedException(
-                    "Cannot change role of Super-Admin");
+                    SUPER_ADMIN_CHANGE_DENIED);
         }
 
         if (newRole == Role.ROLE_SUPER_ADMIN) {
             throw new AccessDeniedException(
-                    "Not allowed to assign new Super-Admin");
+                    SUPER_ADMIN_ASSIGN_DENIED);
         }
 
         if (actor.getRole() == Role.ROLE_ADMIN) {
@@ -74,7 +77,7 @@ public class UserService {
                     || newRole == Role.ROLE_ADMIN;
             if (!allowed) {
                 throw new AccessDeniedException(
-                        "Admin can only change roles between USER and ADMIN");
+                        ADMIN_ROLE_CHANGE_LIMITATION);
             }
         }
 
@@ -89,7 +92,7 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("User not found: " + username));
+                        new IllegalArgumentException(USER_NOT_FOUND + username));
     }
 
 
