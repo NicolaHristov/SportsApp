@@ -11,15 +11,10 @@ import java.util.List;
 @Service
 public class CommentService {
 
-
     private final CommentRepository commentRepository;
 
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
-    }
-
-    public List<Comment> getCommentsForDiscipline(Discipline discipline) {
-        return commentRepository.findByDiscipline(discipline);
     }
 
     public void addComment(String text, User user, Discipline discipline) {

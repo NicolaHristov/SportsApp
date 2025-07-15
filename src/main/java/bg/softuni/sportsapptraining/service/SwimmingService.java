@@ -11,6 +11,7 @@ import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming
 import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_200M;
 import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_50M;
 import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_FREESTYLE_400M;
+import static bg.softuni.sportsapptraining.constant.ExceptionMessages.DISCIPLINE_NOT_FOUND;
 import static bg.softuni.sportsapptraining.constant.ImageUrlConstants.Swimming.*;
 import static bg.softuni.sportsapptraining.constant.ImageUrlConstants.Swimming.DEFAULT_URL;
 
@@ -33,7 +34,7 @@ public class SwimmingService {
         return disciplineRepository
                 .findById(id)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Discipline with id " + id + " not found"));
+                        new IllegalArgumentException(String.format(DISCIPLINE_NOT_FOUND, id)));
     }
 
     public String getChampionImageUrl(String discipline) {

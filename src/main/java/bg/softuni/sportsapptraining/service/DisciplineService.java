@@ -24,5 +24,4 @@ public class DisciplineService {
         return disciplineRepository.findAll();
     }
 
-
 }

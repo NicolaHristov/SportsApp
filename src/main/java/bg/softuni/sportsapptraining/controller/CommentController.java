@@ -59,8 +59,6 @@ public class CommentController {
 
         Comment comment = new Comment(content, user, discipline);
 
-        commentService.save(comment);
-
         String sportPath = discipline.getSport().getName().toLowerCase();
 
         return "redirect:/" + sportPath + "?disciplineId=" + discipline.getId();
