@@ -22,8 +22,4 @@ public class DisciplineService {
                 .orElseThrow(() -> new IllegalArgumentException(String.format(DISCIPLINE_NOT_FOUND_BY_ID, disciplineId)));
     }
 
-    public List<Discipline> getAllDisciplines() {
-        return disciplineRepository.findAll();
-    }
-
 }
