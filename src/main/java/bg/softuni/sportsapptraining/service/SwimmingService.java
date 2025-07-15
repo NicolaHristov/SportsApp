@@ -6,6 +6,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.*;
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_100M;
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_200M;
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_50M;
+import static bg.softuni.sportsapptraining.constant.DisciplineConstants.Swimming.SWIMMING_FREESTYLE_400M;
+import static bg.softuni.sportsapptraining.constant.ImageUrlConstants.Swimming.*;
+import static bg.softuni.sportsapptraining.constant.ImageUrlConstants.Swimming.DEFAULT_URL;
+
 @Service
 public class SwimmingService {
 
@@ -26,5 +34,23 @@ public class SwimmingService {
                 .findById(id)
                 .orElseThrow(() ->
                         new IllegalArgumentException("Discipline with id " + id + " not found"));
+    }
+
+    public String getChampionImageUrl(String discipline) {
+        return switch (discipline) {
+            case  SWIMMING_FREESTYLE_50M  -> FREESTYLE_50M_URL;
+            case  SWIMMING_FREESTYLE_100M -> FREESTYLE_100M_URL;
+            case  SWIMMING_FREESTYLE_200M ->
+                    FREESTYLE_200M_URL;
+            case  SWIMMING_FREESTYLE_400M->
+                    FREESTYLE_400M_URL;
+            case  SWIMMING_BREASTSTROKE_50M ->
+                    BREASTSTROKE_50M_URL ;
+            case  SWIMMING_BREASTSTROKE_100M ->
+                    BREASTSTROKE_100M_URL;
+            case SWIMMING_BREASTSTROKE_200M ->
+                    BREASTSTROKE_200M_URL;
+            default -> DEFAULT_URL;
+        };
     }
 }
