@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static bg.softuni.sportsapptraining.constant.ExceptionMessages.DISCIPLINE_NOT_FOUND_BY_ID;
+
 @Service
 public class DisciplineService {
 
@@ -17,7 +19,7 @@ public class DisciplineService {
 
     public Discipline getDisciplineById(Long disciplineId) {
         return disciplineRepository.findById(disciplineId)
-                .orElseThrow(() -> new IllegalArgumentException("Discipline not found with ID: " + disciplineId));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(DISCIPLINE_NOT_FOUND_BY_ID, disciplineId)));
     }
 
     public List<Discipline> getAllDisciplines() {
