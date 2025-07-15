@@ -4,8 +4,6 @@ import bg.softuni.sportsapptraining.model.Discipline;
 import bg.softuni.sportsapptraining.repository.DisciplineRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import static bg.softuni.sportsapptraining.constant.ExceptionMessages.DISCIPLINE_NOT_FOUND_BY_ID;
 
 @Service
