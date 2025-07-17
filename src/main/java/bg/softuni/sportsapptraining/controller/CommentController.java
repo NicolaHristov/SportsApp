@@ -28,16 +28,6 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String showComments(Model model, Principal principal) {
-        List<Comment> comments = commentService.findAll();
-
-        model.addAttribute("comments", comments);
-        model.addAttribute("isLogged", principal != null);
-
-        return ViewNames.COMMENTS;
-    }
-
     @GetMapping("/{disciplineId}")
     public String showCommentsForDiscipline(@PathVariable Long disciplineId, Model model, Principal principal) {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
@@ -55,10 +45,10 @@ public class CommentController {
     @PreAuthorize("isAuthenticated()")
     public String addComment(@RequestParam String content, @RequestParam Long disciplineId, Principal principal) {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+
         User user = userService.findByUsername(principal.getName());
-
         Comment comment = new Comment(content, user, discipline);
-
+        commentService.save(comment);
         String sportPath = discipline.getSport().getName().toLowerCase();
 
         return "redirect:/" + sportPath + "?disciplineId=" + discipline.getId();
