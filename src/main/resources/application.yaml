@@ -2,8 +2,9 @@ spring:
   config:
     import:
       - "optional:file:./.env[.properties]"
-      - "application-secret.yml"
+      - "optional:secrets:/etc/secrets/application-secret.yml"
   profiles:
     active: mysql
+
 
 
