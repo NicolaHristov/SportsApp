@@ -1,6 +1,5 @@
 package com.nikola.sportsapp.controller;
 
-
 import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
 import com.nikola.sportsapp.service.AthleticsService;
