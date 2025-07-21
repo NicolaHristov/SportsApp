@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://aws.connect.psdb.cloud/sportsapp?sslMode=VERIFY_IDENTITY&allowPublicKeyRetrieval=true
-    username: 7bh83c80txu21xqh4ew2
-    password: pscale_pw_8LlRia2NpG0EvNN5e9JyJJZv3xPc6Yv3MhTEMWewE81
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
