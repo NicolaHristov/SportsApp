@@ -82,3 +82,22 @@ cloudinary:
 Run the application:
 mvn spring-boot:run
 ```
+---
+
+## 🌐 Monitoring with UptimeRobot
+
+To ensure the Render deployment stays responsive, this project uses [UptimeRobot](https://uptimerobot.com/) for periodic health checks.
+
+### ✅ Why?
+Render puts free services to sleep after periods of inactivity, which can result in slow initial load times. UptimeRobot sends a ping every 5 minutes to keep the app "awake" and responsive.
+
+### 🔧 How it's configured:
+- **Service**: UptimeRobot (Free Plan)  
+- **Type**: HTTP(s)  
+- **URL**: `https://sportsapp-web.onrender.com/`  
+- **Interval**: Every 5 minutes  
+- **Setup time**: ~5 minutes  
+- **No code changes required** 🎉
+
+You can optionally monitor additional endpoints such as `/home`, `/athletics`, or `/swimming`.
+
