@@ -1,103 +1,138 @@
-# SportsApp 🏅
+# 👋 Hello, I'm Nikola Hristov
 
-**SportsApp** is a full-stack Java Spring Boot web application that allows users to explore various sports and their disciplines, including Athletics and Swimming. Users can register, browse champions and world records, and interact through comments.
+🎯 **Junior Java Developer**  
+💡 Passionate about backend development, Spring Boot, and clean architecture  
+🚀 Currently working on real-world portfolio projects  
 
----
-
-## ✨ Features
-
-- 🔐 User registration and login  
-- 🏃 Browse sports and related disciplines (Athletics and Swimming)  
-- 🥇 View champions and world records per discipline  
-- 💬 Add and view user comments  
-- 🛡️ Admin panel for managing users and changing roles  
-# SportsApp 🏅
+## 🛠️ Technologies & Tools
 
 ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
-![Spring Security](https://img.shields.io/badge/Security-%236DB33F.svg?style=for-the-badge&logo=springsecurity&logoColor=white)
 ![Hibernate](https://img.shields.io/badge/Hibernate-%234895C2.svg?style=for-the-badge&logo=hibernate&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring_Security-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Git](https://img.shields.io/badge/Git-%23F05032.svg?style=for-the-badge&logo=git&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
+![REST API](https://img.shields.io/badge/REST_API-%23007ACC.svg?style=for-the-badge&logo=fastapi&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![Flyway](https://img.shields.io/badge/Flyway-CC0000?style=for-the-badge&logo=flyway&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![Git](https://img.shields.io/badge/Git-%23F05032.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-%23C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
-![REST API](https://img.shields.io/badge/REST_API-%23007ACC.svg?style=for-the-badge&logo=fastapi&logoColor=white)
 
----
 
-## 🛠️ Tech Stack
+## 📂 Portfolio Projects
 
-- Java 17  
-- Spring Boot  
-- Spring Security  
-- Thymeleaf  
-- MySQL  
-- Cloudinary (image hosting)  
-- HTML5, CSS3, Bootstrap  
+🔹 [🏃 Sports Statistics App (Live Demo)](https://sportsapp-web.onrender.com/)  
+🔗 [GitHub Repository](https://github.com/nicolahristov/SportsApp)
 
----
+A full-stack Spring Boot web application for managing athletics and swimming disciplines. Features include user registration and login, role-based access control, Cloudinary image integration, champion and world record pages, and a commenting system for logged-in users.
+The app is deployed to Render and uses PlanetScale as a production-ready cloud MySQL database. Schema migrations are managed by Flyway to ensure consistency across environments and support version control of the database structure.
 
-## 🚀 Getting Started
+## 🖼️ Screenshots
 
-### Prerequisites
+### 🔐 Login Page
+![Login Page](screenshots/login-page.png)
 
-- Java 17+  
+### 📝 Register Page
+![Register Page](screenshots/register-page.png)
+
+### 🏃 Athletics Page
+![Athletics Page](screenshots/athletics-page.png)
+
+### 🏊 Swimming Page
+![Swimming Page](screenshots/swimming-page.png)
+
+### 🏅 Swimming 50m Champion
+![Swimming 50 Page](screenshots/swimming-50-page.png)
+
+## 🔧 Getting Started
+
+To run this project locally, follow these steps:
+
+### ✅ Prerequisites
+
+- Java 17 or higher  
 - Maven  
-- MySQL  
-- IntelliJ IDEA  
+- Git  
+- MySQL database or PlanetScale account (for cloud deployment)
 
-### Installation Steps
-
-```
-Clone the repository:
-git clone https://github.com/NicolaHristov/SportsApp.git
-
-Open the project in IntelliJ:
-- Open IntelliJ IDEA
-- Choose File > Open and select the cloned project folder
-- Import it as a Maven project (if prompted)
-
-Create a MySQL database:
-CREATE DATABASE sports_db;
-
-Create a configuration file:
-Add a file named application-secret.yml under src/main/resources with the following content:
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/sports_db
-    username: 
-    password: 
-
-cloudinary:
-  cloud-name: 
-  api-key: 
-  api-secret: 
-
-Run the application:
-mvn spring-boot:run
-```
 ---
 
-## 🌐 Monitoring with UptimeRobot
+### 📦 Clone the Repository
 
-To ensure the Render deployment stays responsive, this project uses [UptimeRobot](https://uptimerobot.com/) for periodic health checks.
+```bash
+git clone https://github.com/nicolahristov/SportsApp.git
+cd SportsApp
+``` 
 
-### ✅ Why?
-Render puts free services to sleep after periods of inactivity, which can result in slow initial load times. UptimeRobot sends a ping every 5 minutes to keep the app "awake" and responsive.
+### ⚙️ Configuration Setup
 
-### 🔧 How it's configured:
-- **Service**: UptimeRobot (Free Plan)  
-- **Type**: HTTP(s)  
-- **URL**: `https://sportsapp-web.onrender.com/`  
-- **Interval**: Every 5 minutes  
-- **Setup time**: ~5 minutes  
-- **No code changes required** 🎉
+Create the following configuration files in the root directory (they are excluded via `.gitignore`):
 
-You can optionally monitor additional endpoints such as `/home`, `/athletics`, or `/swimming`.
+#### `application-secret.yml`
 
+```yaml
+cloudinary:
+  cloud-name: YOUR_CLOUD_NAME
+  api-key: YOUR_API_KEY
+  api-secret: YOUR_API_SECRET
+
+admin:
+  email: YOUR_ADMIN_EMAIL
+  username: YOUR_ADMIN_USERNAME
+  password: YOUR_SECURE_PASSWORD
+``` 
+
+#### `.env` *(optional)*
+
+```properties
+# You can use this to override secret values locally if needed
+You can choose between two profiles depending on the environment:
+```
+
+### ☁️ Option 1: Run with PlanetScale
+
+This is the default and recommended setup to simulate a production environment:
+```
+
+```bash
+mvn spring-boot:run -Dspring.profiles.active=planetscale
+```
+Make sure application-planetscale.yml contains your JDBC URL, username, and password for PlanetScale.
+
+### 🛠️ Option 2: Run Locally with MySQL
+
+If you prefer to use a local MySQL server:
+
+```bash
+mvn spring-boot:run -Dspring.profiles.active=mysql
+```
+The local database will auto-create if it doesn't exist. Update credentials in application-mysql.yml if needed.
+
+### 🌍 Access the App
+
+Once the app is running, open:
+
+[http://localhost:8080](http://localhost:8080)
+
+You can register a new user or use your predefined admin credentials from application-secret.yml.
+
+
+## 🧠 Currently & Availability
+
+- 🎯 **Currently learning:** Spring Security
+- 👀 **Open to work:** Junior Java Developer roles (remote or on-site)  
+- 📌 **Fun fact:** I enjoy building sports-related web apps — and since the beginning of this year, I’ve also been learning to play the traditional Bulgarian bagpipe (gaida)!
+
+
+## 📈 GitHub Stats
+
+![Nikola's GitHub stats](https://github-readme-stats.vercel.app/api?username=nicolahristov&show_icons=true&theme=default)
+
+## 🌐 Find me around the web
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/nikola-hristov-54800236a/)
+- 🌍 [Portfolio Website](https://sportsapp-web.onrender.com)
+- ✉️ Email: swimmingman23@abv.bg
