@@ -3,8 +3,6 @@
     import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
     import org.springframework.http.HttpMethod;
-    import org.springframework.security.authentication.AuthenticationManager;
-    import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
     import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
     import org.springframework.security.config.annotation.web.builders.HttpSecurity;
     import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,36 +13,6 @@
     @Configuration
     @EnableMethodSecurity
     public class SecurityConfig {
-
-//        @Bean
-//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//            http
-//                    .csrf(AbstractHttpConfigurer::disable)
-//                    .authorizeHttpRequests(auth -> auth
-//                            .requestMatchers("/", "/home", "/index", "/register", "/upload", "/athletics", "/swimming", "/login").permitAll()
-//                            .requestMatchers(HttpMethod.POST, "/register").permitAll()
-//                            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-//                            .requestMatchers("/admin/**").hasRole("ADMIN")
-//                            .requestMatchers(HttpMethod.POST, "/comments").authenticated()
-//                            .anyRequest().authenticated()
-//                    )
-//    //                .formLogin(login -> login
-//    //                        .loginPage("/login")
-//    //                        .defaultSuccessUrl("/home", true)
-//    //                        .failureUrl("/login?error=true")
-//    //                        .permitAll()
-//    //                )
-//                    .logout(logout -> logout
-//                            .logoutUrl("/logout")
-//                            .logoutSuccessUrl("/")
-//                            .permitAll()
-//                    )
-//                    .sessionManagement(session -> session
-//                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//                    );
-//
-//            return http.build();
-//        }
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -80,7 +48,6 @@
 
             return http.build();
         }
-
 
         @Bean
         public PasswordEncoder passwordEncoder() {
