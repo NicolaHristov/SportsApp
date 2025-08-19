@@ -38,8 +38,5 @@ public class Comment {
         this.discipline = discipline;
         this.dateTime = LocalDateTime.now();
     }
-    @PrePersist
-    protected void onCreate() {
-        this.dateTime = LocalDateTime.now();
-    }
+
 }
