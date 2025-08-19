@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name ="disciplines")
+@Table(name = "disciplines")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,7 +32,9 @@ public class Discipline {
             cascade = CascadeType.REMOVE,
             orphanRemoval = true
     )
+
     private List<Comment> comments = new ArrayList<>();
+
     public Discipline(String name, String worldRecordHolder, String worldRecordTime) {
         this.name = name;
         this.worldRecordHolder = worldRecordHolder;
