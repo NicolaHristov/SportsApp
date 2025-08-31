@@ -25,7 +25,7 @@ public class AdminController {
 
     @GetMapping("/manage-users")
     public String manageUsers(Model model) {
-        model.addAttribute("users", userService.findAllUsers());
+        model.addAttribute("users", userService.findAllUsersDto());
         return "admin-manage-users";
     }
     @PostMapping("/change-role")
