@@ -35,6 +35,7 @@ public class UserService {
         if (existingUser.isPresent()) {
             return false;
         }
+
         if (!data.getPassword().equals(data.getConfirmPassword())){
             return false;
         }
