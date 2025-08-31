@@ -7,6 +7,7 @@ import com.nikola.sportsapp.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +26,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     public boolean register(RegisterDto data) {
         Optional<User> existingUser =
@@ -34,9 +36,7 @@ public class UserService {
             return false;
         }
 
-        User user = new User();
-        user.setUsername(data.getUsername());
-        user.setEmail(data.getEmail());
+        User user = modelMapper.map(data, User.class);
         user.setRole(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(data.getPassword()));
         userRepository.save(user);
