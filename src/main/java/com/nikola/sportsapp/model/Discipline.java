@@ -17,7 +17,7 @@ public class Discipline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @Column(name = "world_record_holder")
