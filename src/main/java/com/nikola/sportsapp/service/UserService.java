@@ -35,6 +35,9 @@ public class UserService {
         if (existingUser.isPresent()) {
             return false;
         }
+        if (!data.getPassword().equals(data.getConfirmPassword())){
+            return false;
+        }
 
         User user = modelMapper.map(data, User.class);
         user.setRole(Role.ROLE_USER);
