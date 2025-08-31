@@ -2,6 +2,7 @@ package com.nikola.sportsapp.service;
 
 import com.nikola.sportsapp.model.User;
 import com.nikola.sportsapp.model.dto.RegisterDto;
+import com.nikola.sportsapp.model.dto.UserDto;
 import com.nikola.sportsapp.model.enums.Role;
 import com.nikola.sportsapp.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -48,8 +49,18 @@ public class UserService {
         return true;
     }
 
-    public List<User> findAllUsers() {
-        return userRepository.findAll();
+//    public List<User> findAllUsers() {
+//        return userRepository.findAll();
+//    }
+
+    public List<UserDto> findAllUsersDto() {
+        return userRepository.findAll().stream()
+                .map(u -> {
+                    UserDto dto = modelMapper.map(u, UserDto.class);
+                    dto.setRole(u.getRole().name()); // enum -> String (ROLE_USER/ADMIN/...)
+                    return dto;
+                })
+                .toList();
     }
 
     @Transactional
