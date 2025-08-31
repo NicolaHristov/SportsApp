@@ -17,6 +17,7 @@ public class RegisterDto {
     private String username;
     @Email
     @NotNull
+    @Size(min = 6, max = 254)
     private String email;
     @NotNull
     @Size(min = 3, max = 20)
