@@ -2,10 +2,10 @@ spring:
   config:
     import:
       - "optional:file:./.env[.properties]"
-      - "optional:secrets:/etc/secrets/application-secret.yml"
-      - "application-planetscale.yml"
+      - "application-railway.yml"
   profiles:
-    active: planetscale
+    active: railway
+
 
 
 
