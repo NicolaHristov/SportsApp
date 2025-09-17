@@ -28,7 +28,9 @@
 🔗 [GitHub Repository](https://github.com/nicolahristov/SportsApp)
 
 A full-stack Spring Boot web application for managing athletics and swimming disciplines. Features include user registration and login, role-based access control, Cloudinary image integration, champion and world record pages, and a commenting system for logged-in users.
-The app is deployed to Render and uses PlanetScale as a production-ready cloud MySQL database. Schema migrations are managed by Flyway to ensure consistency across environments and support version control of the database structure.
+
+The app is deployed to Render and uses Railway (PostgreSQL) as the production database.  
+Schema migrations are managed by Flyway to ensure consistency across environments and support version control of the database structure.
 
 ## 🖼️ Screenshots
 
@@ -56,7 +58,7 @@ To run this project locally, follow these steps:
 - Java 17 or higher  
 - Maven  
 - Git  
-- MySQL database or PlanetScale account (for cloud deployment)
+- PostgreSQL database (Railway for production deployment, local PostgreSQL optional) 
 
 ---
 
@@ -92,15 +94,15 @@ admin:
 You can choose between two profiles depending on the environment:
 ```
 
-### ☁️ Option 1: Run with PlanetScale
+### ☁️ Option 1: Run with Railway
 
 This is the default and recommended setup to simulate a production environment:
 ```
 
 ```bash
-mvn spring-boot:run -Dspring.profiles.active=planetscale
+mvn spring-boot:run -Dspring.profiles.active=railway
 ```
-Make sure application-planetscale.yml contains your JDBC URL, username, and password for PlanetScale.
+Make sure application-railway.yml contains your JDBC URL
 
 ### 🛠️ Option 2: Run Locally with MySQL
 
@@ -119,6 +121,10 @@ Once the app is running, open:
 
 You can register a new user or use your predefined admin credentials from application-secret.yml.
 
+For testing admin features, use:
+Username: admin
+Password: admin123
+
 
 ## 🧠 Currently & Availability
 
@@ -136,3 +142,4 @@ You can register a new user or use your predefined admin credentials from applic
 - 💼 [LinkedIn](https://www.linkedin.com/in/nikola-hristov-54800236a/)
 - 🌍 [Portfolio Website](https://sportsapp-web.onrender.com)
 - ✉️ Email: swimmingman23@abv.bg
+
