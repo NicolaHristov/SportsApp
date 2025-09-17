@@ -4,6 +4,7 @@ import com.nikola.sportsapp.constant.ViewNames;
 import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
 import com.nikola.sportsapp.model.User;
+import com.nikola.sportsapp.model.dto.CommentDto;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.DisciplineService;
 import com.nikola.sportsapp.service.UserService;
@@ -32,7 +33,7 @@ public class CommentController {
     public String showCommentsForDiscipline(@PathVariable Long disciplineId, Model model, Principal principal) {
         Discipline discipline = disciplineService.getDisciplineById(disciplineId);
 
-        List<Comment> commentsForDiscipline = commentService.findByDiscipline(discipline);
+        List<CommentDto> commentsForDiscipline = commentService.findAllByDiscipline(disciplineId);
         model.addAttribute("comments", commentsForDiscipline);
         model.addAttribute("discipline", discipline);
         model.addAttribute("selectedDiscipline", discipline);
