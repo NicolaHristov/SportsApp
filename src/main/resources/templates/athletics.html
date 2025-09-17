@@ -44,7 +44,7 @@
                      class="comments-section">
                 <article th:each="comment : ${comments}">
                     <p>
-                        <strong th:text="${comment.user.username}">Username</strong>:
+                        <strong th:text="${comment.username}">Username</strong>:
                         <span th:text="${comment.content}">Content</span>
                     </p>
                     <p class="comment-date"
