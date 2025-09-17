@@ -2,6 +2,7 @@ package com.nikola.sportsapp.controller;
 
 import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
+import com.nikola.sportsapp.model.dto.CommentDto;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.SwimmingService;
 import org.springframework.stereotype.Controller;
@@ -29,20 +30,19 @@ public class SwimmingController {
     }
 
     @GetMapping
-    public String showSwimming(
-            @RequestParam(name = "disciplineId", required = false) Long disciplineId,
-            Model model) {
+    public String showSwimming(@RequestParam(name = "disciplineId", required = false) Long disciplineId,
+                               Model model) {
 
         model.addAttribute("disciplines", swimmingService.getAllDisciplines());
 
         if (disciplineId != null) {
             Discipline selected = swimmingService.getDisciplineById(disciplineId);
-            List<Comment> comments = commentService.findByDiscipline(selected);
+            List<CommentDto> comments = commentService.findAllByDiscipline(disciplineId);
 
             model.addAttribute("selectedDiscipline", selected);
             model.addAttribute("comments", comments);
             model.addAttribute("championImageUrl",
-                   swimmingService.getChampionImageUrl(selected.getName()));
+                    swimmingService.getChampionImageUrl(selected.getName()));
         }
 
         return "swimming";

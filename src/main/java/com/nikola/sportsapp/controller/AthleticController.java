@@ -2,6 +2,7 @@ package com.nikola.sportsapp.controller;
 
 import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
+import com.nikola.sportsapp.model.dto.CommentDto;
 import com.nikola.sportsapp.service.AthleticsService;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.DisciplineService;
@@ -42,7 +43,7 @@ public class AthleticController {
 
         if (disciplineId != null) {
             Discipline selected = disciplineService.getDisciplineById(disciplineId);
-            List<Comment> comments = commentService.findByDiscipline(selected);
+            List<CommentDto> comments = commentService.findAllByDiscipline(disciplineId);
 
             model.addAttribute("selectedDiscipline", selected);
             model.addAttribute("comments", comments);
