@@ -1,10 +1,13 @@
 package com.nikola.sportsapp.service;
 
 import com.nikola.sportsapp.model.Discipline;
+import com.nikola.sportsapp.model.dto.DisciplineDto;
 import com.nikola.sportsapp.repository.DisciplineRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.nikola.sportsapp.constant.DisciplineConstants.Swimming.*;
 import static com.nikola.sportsapp.constant.DisciplineConstants.Swimming.SWIMMING_BREASTSTROKE_100M;
@@ -19,22 +22,44 @@ import static com.nikola.sportsapp.constant.ImageUrlConstants.Swimming.DEFAULT_U
 public class SwimmingService {
 
     private final DisciplineRepository disciplineRepository;
+    private final ModelMapper modelMapper;
 
-    public SwimmingService(DisciplineRepository disciplineRepository) {
+    public SwimmingService(DisciplineRepository disciplineRepository, ModelMapper modelMapper) {
         this.disciplineRepository = disciplineRepository;
-    }
-    public List<Discipline> getAllDisciplines() {
-        return disciplineRepository.findAllBySportName("Swimming");
+        this.modelMapper = modelMapper;
     }
 
-    public Discipline getDisciplineByName(String name) {
-        return disciplineRepository.findByName(name);
+    public List<DisciplineDto> getAllDisciplineDtos() {
+        return disciplineRepository.findAllBySportNameWithSport("Swimming")
+                .stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
     }
-    public Discipline getDisciplineById(Long id) {
-        return disciplineRepository
-                .findById(id)
+
+    public DisciplineDto getDisciplineById(Long id) {
+        Discipline discipline = disciplineRepository.findByIdWithSport(id)
                 .orElseThrow(() ->
                         new IllegalArgumentException(String.format(DISCIPLINE_NOT_FOUND, id)));
+
+        return mapToDto(discipline);
+    }
+
+    private DisciplineDto mapToDto(Discipline discipline) {
+        return new DisciplineDto(
+                discipline.getId(),
+                discipline.getName(),
+                discipline.getSport() != null ? discipline.getSport().getName() : null,
+                discipline.getWorldRecordHolder(),
+                discipline.getWorldRecordTime()
+        );
+    }
+
+    public DisciplineDto getDisciplineByName(String name) {
+        Discipline discipline = disciplineRepository.findByNameWithSport(name);
+        if (discipline == null) {
+            throw new IllegalArgumentException("Swimming discipline not found: " + name);
+        }
+        return modelMapper.map(discipline, DisciplineDto.class);
     }
 
     public String getChampionImageUrl(String discipline) {
@@ -54,4 +79,5 @@ public class SwimmingService {
             default -> DEFAULT_URL;
         };
     }
+
 }
