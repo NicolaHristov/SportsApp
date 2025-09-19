@@ -1,8 +1,7 @@
 package com.nikola.sportsapp.controller;
 
-import com.nikola.sportsapp.model.Comment;
-import com.nikola.sportsapp.model.Discipline;
 import com.nikola.sportsapp.model.dto.CommentDto;
+import com.nikola.sportsapp.model.dto.DisciplineDto;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.SwimmingService;
 import org.springframework.stereotype.Controller;
@@ -33,16 +32,16 @@ public class SwimmingController {
     public String showSwimming(@RequestParam(name = "disciplineId", required = false) Long disciplineId,
                                Model model) {
 
-        model.addAttribute("disciplines", swimmingService.getAllDisciplines());
+        model.addAttribute("disciplines", swimmingService.getAllDisciplineDtos());
 
         if (disciplineId != null) {
-            Discipline selected = swimmingService.getDisciplineById(disciplineId);
+            DisciplineDto selectedDto = swimmingService.getDisciplineById(disciplineId);
             List<CommentDto> comments = commentService.findAllByDiscipline(disciplineId);
 
-            model.addAttribute("selectedDiscipline", selected);
+            model.addAttribute("selectedDiscipline", selectedDto);
             model.addAttribute("comments", comments);
             model.addAttribute("championImageUrl",
-                    swimmingService.getChampionImageUrl(selected.getName()));
+                    swimmingService.getChampionImageUrl(selectedDto.getName()));
         }
 
         return "swimming";
@@ -50,8 +49,8 @@ public class SwimmingController {
 
     @PostMapping
     public String selectDiscipline(@RequestParam("discipline") String disciplineName) {
-        Discipline selected = swimmingService.getDisciplineByName(disciplineName);
-        return "redirect:/swimming?disciplineId=" + selected.getId();
+        DisciplineDto selectedDto = swimmingService.getDisciplineByName(disciplineName);
+        return "redirect:/swimming?disciplineId=" + selectedDto.getId();
     }
 
 }
