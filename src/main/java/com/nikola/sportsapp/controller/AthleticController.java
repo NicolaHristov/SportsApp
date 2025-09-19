@@ -3,6 +3,7 @@ package com.nikola.sportsapp.controller;
 import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
 import com.nikola.sportsapp.model.dto.CommentDto;
+import com.nikola.sportsapp.model.dto.DisciplineDto;
 import com.nikola.sportsapp.service.AthleticsService;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.DisciplineService;
@@ -39,16 +40,16 @@ public class AthleticController {
     @GetMapping("/athletics")
     public String athletics(@RequestParam(name = "disciplineId", required = false) Long disciplineId, Model model) {
 
-        model.addAttribute("disciplines", athleticsService.getAllDisciplines());
+        model.addAttribute("disciplines", athleticsService.getAllDisciplineDtos());
 
         if (disciplineId != null) {
-            Discipline selected = disciplineService.getDisciplineById(disciplineId);
+            DisciplineDto selectedDto = disciplineService.getDisciplineById(disciplineId);
             List<CommentDto> comments = commentService.findAllByDiscipline(disciplineId);
 
-            model.addAttribute("selectedDiscipline", selected);
+            model.addAttribute("selectedDiscipline", selectedDto);
             model.addAttribute("comments", comments);
             model.addAttribute("championImageUrl",
-                    athleticsService.getChampionImageUrl(selected.getName()));
+                    athleticsService.getChampionImageUrl(selectedDto.getName()));
         }
 
         return "athletics";
@@ -56,8 +57,8 @@ public class AthleticController {
 
     @PostMapping("/athletics")
     public String selectDiscipline(@RequestParam("discipline") String disciplineName) {
-        Discipline selected = athleticsService.getDisciplineByName(disciplineName);
-        return "redirect:/athletics?disciplineId=" + selected.getId();
+        DisciplineDto selectedDto = athleticsService.getDisciplineByName(disciplineName);
+        return "redirect:/athletics?disciplineId=" + selectedDto.getId();
     }
 
 }
