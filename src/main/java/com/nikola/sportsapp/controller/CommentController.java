@@ -5,6 +5,7 @@ import com.nikola.sportsapp.model.Comment;
 import com.nikola.sportsapp.model.Discipline;
 import com.nikola.sportsapp.model.User;
 import com.nikola.sportsapp.model.dto.CommentDto;
+import com.nikola.sportsapp.model.dto.DisciplineDto;
 import com.nikola.sportsapp.service.CommentService;
 import com.nikola.sportsapp.service.DisciplineService;
 import com.nikola.sportsapp.service.UserService;
@@ -19,6 +20,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
+
     private final CommentService commentService;
     private final DisciplineService disciplineService;
     private final UserService userService;
@@ -31,12 +33,12 @@ public class CommentController {
 
     @GetMapping("/{disciplineId}")
     public String showCommentsForDiscipline(@PathVariable Long disciplineId, Model model, Principal principal) {
-        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+        DisciplineDto disciplineDto = disciplineService.getDisciplineById(disciplineId);
 
         List<CommentDto> commentsForDiscipline = commentService.findAllByDiscipline(disciplineId);
         model.addAttribute("comments", commentsForDiscipline);
-        model.addAttribute("discipline", discipline);
-        model.addAttribute("selectedDiscipline", discipline);
+        model.addAttribute("discipline", disciplineDto);
+        model.addAttribute("selectedDiscipline", disciplineDto);
         model.addAttribute("isLogged", principal != null);
 
         return ViewNames.COMMENTS;
@@ -45,13 +47,12 @@ public class CommentController {
     @PostMapping("/add")
     @PreAuthorize("isAuthenticated()")
     public String addComment(@RequestParam String content, @RequestParam Long disciplineId, Principal principal) {
-        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+        DisciplineDto disciplineDto = disciplineService.getDisciplineById(disciplineId);
 
         User user = userService.findByUsername(principal.getName());
-        Comment comment = new Comment(content, user, discipline);
-        commentService.save(comment);
-        String sportPath = discipline.getSport().getName().toLowerCase();
+        commentService.addComment(content,disciplineId,user);
+        String sportPath = disciplineDto.getSportName().toLowerCase();
 
-        return "redirect:/" + sportPath + "?disciplineId=" + discipline.getId();
+        return "redirect:/" + sportPath + "?disciplineId=" + disciplineDto.getId();
     }
 }
