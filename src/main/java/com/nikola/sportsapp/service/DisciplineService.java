@@ -1,6 +1,7 @@
 package com.nikola.sportsapp.service;
 
 import com.nikola.sportsapp.model.Discipline;
+import com.nikola.sportsapp.model.dto.DisciplineDto;
 import com.nikola.sportsapp.repository.DisciplineRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,18 @@ public class DisciplineService {
         this.disciplineRepository = disciplineRepository;
     }
 
-    public Discipline getDisciplineById(Long disciplineId) {
-        return disciplineRepository.findById(disciplineId)
-                .orElseThrow(() -> new IllegalArgumentException(String.format(DISCIPLINE_NOT_FOUND_BY_ID, disciplineId)));
+    public DisciplineDto getDisciplineById(Long disciplineId) {
+        Discipline discipline = disciplineRepository.findByIdWithSport(disciplineId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format(DISCIPLINE_NOT_FOUND_BY_ID, disciplineId)));
+
+        return new DisciplineDto(
+                discipline.getId(),
+                discipline.getName(),
+                discipline.getSport() != null ? discipline.getSport().getName() : null,
+                discipline.getWorldRecordHolder(),
+                discipline.getWorldRecordTime()
+        );
     }
 
 }
